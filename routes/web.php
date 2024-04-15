@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Apps\Admin\MenuController;
 use App\Http\Controllers\Apps\Admin\CategoryController;
 use App\Http\Controllers\Apps\Admin\ProductController;
+use App\Http\Controllers\Apps\Admin\EventController;
+use App\Http\Controllers\Webs\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::resource('/product', ProductController::class);
         Route::get('product-change-status', [ProductController::class,'change_status'])->name('product.change.status');
+
+        Route::resource('/events', EventController::class);
+        Route::get('events-change-status', [EventController::class,'change_status'])->name('events.change.status');
     });
 
     Route::name('business.')->group(function () {
@@ -81,6 +86,10 @@ Route::get('/error', function () {
     abort(500);
 });
 
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::get('menu', 'product')->name('product');
+});
 Route::get('/auth/redirect/{provider}', [SocialiteController::class, 'redirect']);
 
 require __DIR__ . '/auth.php';

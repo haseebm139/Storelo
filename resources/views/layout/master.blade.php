@@ -14,7 +14,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:title" content="" />
     <link rel="canonical" href="" />
-
+    <script src="{{ asset('assets/js/ckeditor/ckeditor.js') }}"></script>
     {!! includeFavicon() !!}
 
     <!--begin::Fonts-->
@@ -77,6 +77,14 @@
     <!--end::Javascript-->
 
     <script>
+        $('.editor').each(function(e) {
+            CKEDITOR.replace(this.id, {
+                allowedContent: true,
+                toolbar: 'Full',
+                enterMode: CKEDITOR.ENTER_BR,
+                shiftEnterMode: CKEDITOR.ENTER_P,
+            });
+        });
         document.addEventListener('livewire:load', () => {
             Livewire.on('success', (message) => {
                 toastr.success(message);

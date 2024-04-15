@@ -4,6 +4,7 @@ use App\Models\User;
 use App\Models\Menu;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Event;
 
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
@@ -102,3 +103,16 @@ Breadcrumbs::for('product-management.product.show', function (BreadcrumbTrail $t
     $trail->push(ucwords($data->name), route('product-management.product.show', $data));
 });
 /* end::Product */
+
+/* begin::Events */
+Breadcrumbs::for('product-management.events.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Events', route('product-management.events.index'));
+
+});
+Breadcrumbs::for('product-management.events.show', function (BreadcrumbTrail $trail, Event $data) {
+
+    $trail->parent('product-management.events.index');
+    $trail->push(ucwords($data->name), route('product-management.events.show', $data));
+});
+/* end::Events */
