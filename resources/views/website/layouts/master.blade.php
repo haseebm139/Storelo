@@ -34,20 +34,20 @@
                             <a class="nav-link" href="{{ route('home') }}">EAT Storelo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="menu.php">Drink</a>
+                            <a class="nav-link" href="#">Drink</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="order.php">Main Menu</a>
+                            <a class="nav-link" href="#">Main Menu</a>
                         </li>
 
                     </ul>
                 </div>
                 <div class="order-first order-md-0 d-flex justify-content-center">
-                    <a class="navbar-brand mx-0" href="index.php"><img src="{{ asset('web_assets/img/logo.png') }}"
+                    <a class="navbar-brand mx-0" href="{{ route('home') }}"><img src="{{ asset('web_assets/img/logo.png') }}"
                             class="nav-img" alt=""></a>
                 </div>
                 <div class="collapse navbar-collapse flex-1 nav-background">
-                    <ul class="nav navbar-nav ml-auto">
+                    {{-- <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="#"><img src="{{ asset('web_assets/img/group.png') }}"
                                     class="nav-img" alt=""></a>
@@ -56,7 +56,7 @@
                             <a class="nav-link nav-flag" href="#"><img
                                     src="{{ asset('web_assets/img/flag2.png') }}" class="nav-img" alt=""></a>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </div>
             </div>
         </nav>

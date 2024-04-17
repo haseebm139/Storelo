@@ -76,7 +76,6 @@
 
 
 
-
     <!-- order-summary-button -->
     <div class="row summary-section">
         <div class="col-sm-12">
@@ -84,14 +83,104 @@
                 <span><img src="{{ asset('web_assets/img/shopping.png') }}" alt=""></span> Order Summary</a>
         </div>
     </div>
-
-    <div class="modal fade" id="orderSummaryModal" tabindex="-1" role="dialog" aria-labelledby="orderSummaryModalLabel"
+    <div class="modal fade" id="orderSummaryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <div class="row summary-section">
+                            <div class="col-sm-12">
+                                <a href="#" class="btn btn-primary summary-btn ty"> <span><img
+                                            src="{{ asset('web_assets/img/shopping.png') }}" alt=""></span> Order
+                                    Summary</a>
+                            </div>
+                        </div>
+
+                        <!-- order-summary-button-end -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3 class="order-descripation">Use This Handy Memory Device To Quickly Recall What You Want
+                                    To
+                                    Order
+                                    And Show It To Your Waiter.</h3>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row table-background ">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+
+                                        <div class="panel-body">
+                                            <div class="">
+                                                <table class="table" id="cart_table">
+                                                    <thead>
+                                                        <tr class="border-b">
+                                                            <th class="text-center table-font ">S.No</strong></th>
+                                                            <th class="text-left table-font">Item(S)</th>
+                                                            <th class="text-center table-font">Quantity</th>
+                                                            <th class="table-font text-center">Price</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-center">1</td>
+                                                            <td class="text-left">Corona bottle</td>
+                                                            <td class="text-center">1</td>
+                                                            <td class="text-center">03</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-center">2</td>
+                                                            <td class="text-left">A large Heineken</td>
+                                                            <td class="text-center">3</td>
+                                                            <td class="text-center">04</td>
+                                                        </tr>
+                                                        <tr class="border-b">
+                                                            <td class="text-center">3</td>
+                                                            <td class="text-left">Big Goldstar</td>
+                                                            <td class="text-center">1</td>
+                                                            <td class="text-center">05</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="text-left"> <Strong>Total</Strong></td>
+                                                            <td class="text-center"></td>
+                                                            <td class="text-center"><Strong>12<Strong></td>
+                                                            <td><Strong>423</Strong></td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3 class="order-bottom">To place your order, please fill in your details below.</h3>
+                                <button type="button" id="printButton" class="btn btn-primary">Print</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="orderSummaryModal1" tabindex="-1" role="dialog"
+        aria-labelledby="orderSummaryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
                 <button type="button" class="close d-none d-none" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -99,8 +188,9 @@
             <div class="modal-body">
                 <div class="row summary-section">
                     <div class="col-sm-12">
-                        <a href="menu.php" class="btn btn-primary summary-btn ty"> <span><img src="assets/img/shopping.png"
-                                    alt=""></span> Order Summary</a>
+                        <a href="#" class="btn btn-primary summary-btn ty"> <span><img
+                                    src="{{ asset('web_assets/img/shopping.png') }}" alt=""></span> Order
+                            Summary</a>
                     </div>
                 </div>
 
@@ -168,6 +258,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <h3 class="order-bottom">To place your order, please fill in your details below.</h3>
+                        <button type="button" id="printButton1" class="btn btn-primary">Print</button>
                     </div>
                 </div>
 
@@ -255,11 +346,24 @@
             $(".nav-item").click(function(e) {
                 get_category = $(this).attr('data-category-slug');
                 $("#category").val(get_category);
+                if (get_category == 'all') {
+                    $('#loadMoreBtn').removeClass('d-none');
+                } else {
+                    $('#loadMoreBtn').addClass('d-none');
+
+                }
+                console.log(get_category);
                 loadMoreData1(1)
             });
             $('.categories-list').on('click', function(e) {
                 get_category = $(this).attr('data-category-slug');
                 $("#category").val(get_category);
+                if (get_category == 'all') {
+                    $('#loadMoreBtn').removeClass('d-none');
+                } else {
+                    $('#loadMoreBtn').addClass('d-none');
+
+                }
                 loadMoreData1(1)
             });
 
@@ -283,6 +387,28 @@
                 addCart(product_id, qty)
             });
 
+
+
+        });
+    </script>
+    <script>
+        document.getElementById('printButton').addEventListener('click', function() {
+            // Open a new window for printing
+            var printWindow = window.open('', '_blank');
+            printWindow.document.write('<html><head><title>Print</title></head><body>');
+
+            // Append the table HTML content to the new window
+            printWindow.document.write(document.getElementById('cart_table').outerHTML);
+
+            // Append a style tag to hide non-printable elements
+            printWindow.document.write('<style>@media print{.noprint{display:none;}}</style>');
+
+            // Close the body and HTML tags
+            printWindow.document.write('</body></html>');
+
+            // Call the print function on the new window
+            printWindow.document.close();
+            printWindow.print();
         });
     </script>
 @endsection
