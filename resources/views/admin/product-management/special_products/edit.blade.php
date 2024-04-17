@@ -2,7 +2,7 @@
 <x-default-layout>
 
     @section('title')
-        Edit Events
+        Edit Special Product
     @endsection
     <style>
         .img-fluid {
@@ -11,9 +11,6 @@
         }
     </style>
 
-    @section('breadcrumbs')
-        {{ Breadcrumbs::render('product-management.events.show', $data) }}
-    @endsection
 
     {{-- @dd($data) --}}
     <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -35,7 +32,7 @@
                 <!--begin::Content-->
                 <div class="card-body py-4 mx-20">
                     <!--begin::Form-->
-                    <form action="{{ route('product-management.events.update', $data->id ?? '') }}" method="POST"
+                    <form action="{{ route('product-management.special-products.update', $data->id ?? '') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -114,7 +111,7 @@
                             <label class="required fw-semibold fs-6 mb-2" name="price">Description</label>
                             <!--end::Label-->
 
-                            <textarea name="description" id="editor" class="editor form-control form-control-solid mb-3 mb-lg-0"
+                            <textarea name="description" id="editor" class=" form-control form-control-solid mb-3 mb-lg-0"
                                 placeholder="Enter Description"> {{ $data->description }}</textarea>
                         </div>
 

@@ -19,4 +19,14 @@ class Category extends Model
     {
         return $this->hasOne(Menu::class, 'id', 'menu_id');
     }
+
+    /**
+     * Get all of the products for the Category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

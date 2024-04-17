@@ -3,10 +3,10 @@
 @endsection
 @section('content')
     <section
-        style="background: url('assets/img/menu-background.png'); background-size: cover; background-position: center; background-repeat: no-repeat;height:240px;">
-        <div class="row ">
+        style="background: url('{{ asset('web_assets/img/menu-background.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;height:240px;">
+        <div class="row">
             <div class="col-sm-12">
-                <h4 class="menu-description">StoleroS alcohol</h4>
+                <h4 class="menu-description">{{ $data['menu']->name }}</h4>
             </div>
         </div>
     </section>
@@ -17,1638 +17,62 @@
     <!-- tabs-start -->
     <section class="tabs-section">
         <div class="container">
+            <div class="d-md-none position-relative">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        All Categories
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#All" onclick="toggleTab('All')">All</a>
 
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                        @if (isset($data['categories']))
+                            @foreach ($data['categories_list'] as $item)
+                                <a class="dropdown-item categories-list" href="javascript:void(0)"
+                                    data-category-slug="{{ $item->slug }}">{{ Str::upper($item->name) }}</a>
+                            @endforeach
+                        @endif
+
+                    </div>
+
+                </div>
+            </div>
+            <ul class="nav nav-tabs d-none d-md-flex" id="myTab" role="tablist">
                 <!-- First row of tabs -->
-                <li class="nav-item">
+                <li class="nav-item" data-category-slug='all'>
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#All" role="tab"
                         aria-controls="home" aria-selected="true">All</a>
                 </li>
                 <!-- Add more tabs here up to 17 -->
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Beers" role="tab"
-                        aria-controls="profile" aria-selected="false">Beers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#vodka" role="tab"
-                        aria-controls="profile" aria-selected="false">vodka</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Whiskey" role="tab"
-                        aria-controls="profile" aria-selected="false">Whiskey</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Gin" role="tab"
-                        aria-controls="profile" aria-selected="false">Gin</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Tequila" role="tab"
-                        aria-controls="profile" aria-selected="false">Tequila</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Anise" role="tab"
-                        aria-controls="profile" aria-selected="false">Anise</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Rum" role="tab"
-                        aria-controls="profile" aria-selected="false">Rum</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Aperitif" role="tab"
-                        aria-controls="profile" aria-selected="false">Aperitif</a>
-                </li>
-                <hr class="w-100" />
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Dejstif" role="tab"
-                        aria-controls="contact" aria-selected="false">Dejstif</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Liquor" role="tab"
-                        aria-controls="contact" aria-selected="false">Liquor</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#cognac" role="tab"
-                        aria-controls="contact" aria-selected="false">cognac</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#White" role="tab"
-                        aria-controls="contact" aria-selected="false">White wine</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Red" role="tab"
-                        aria-controls="contact" aria-selected="false">Red wine</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Sparkling" role="tab"
-                        aria-controls="contact" aria-selected="false">Sparkling</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Rosé" role="tab"
-                        aria-controls="contact" aria-selected="false">Rosé wine</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Cocktails" role="tab"
-                        aria-controls="contact" aria-selected="false">Cocktails</a>
-                </li>
-                <!-- Add more tabs here if needed -->
+                @if (isset($data['categories']))
+                    @foreach ($data['categories_list'] as $item)
+                        <li class="nav-item" data-category-slug="{{ $item->slug }}">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Beers" role="tab"
+                                aria-controls="profile" aria-selected="false">{{ Str::upper($item->name) }}</a>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
 
-
-
-
-
-            <div class="tab-content" id="myTabContent">
-                <!-- Content for All tab -->
-                <div class="tab-pane fade show active" id="All" role="tabpanel" aria-labelledby="home-tab">
-                    <!-- heding -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">BEERS</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/mac.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">Whiskey</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/mac.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-                    <!-- heading start -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">Vodka</h4>
-                        </div>
-                    </div>
-
-                    <!-- heading end -->
-                    <!-- row start -->
-                    <div class="row mt-3">
-
-                        <!-- col-6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/Corona.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/big.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- col-6-second start -->
-                    </div>
-                    <!-- row-end -->
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <!-- Center the column -->
-                            <div class="col-sm-12 text-center">
-                                <!-- Center the button -->
-                                <a href="#" class="btn btn-primary welcome-btn">Load More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- summary-button -->
-
-
-                </div>
-                <!-- tab-content end all -->
-
-                <!-- Content for Beers tab -->
-                <div class="tab-pane fade" id="Beers" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">BEERS</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/mac.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-
-
-
-                    <!-- summary-button -->
-                </div>
-                <!-- Content for Beers tab end -->
-
-                <!-- Content for Vodka tab -->
-                <div class="tab-pane fade" id="vodka" role="tabpanel" aria-labelledby="profile-tab">
-
-                    <!-- heading start -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">Vodka</h4>
-                        </div>
-                    </div>
-
-                    <!-- heading end -->
-                    <!-- row start -->
-                    <div class="row mt-3">
-
-                        <!-- col-6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/Corona.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/big.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- col-6-second start -->
-                    </div>
-                    <!-- row-end -->
-
-
-                    <!-- Center the column -->
-
-                    <!-- Center the button -->
-
-
-
-                    <!-- summary-button -->
-                </div>
-                <!-- Content for Vodka tab end -->
-
-                <!-- Content for Whiskey tab -->
-                <div class="tab-pane fade" id="Whiskey" role="tabpanel" aria-labelledby="profile-tab">
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">Whiskey</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/mac.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-                    <!-- heading start -->
-
-                    <!-- row-end -->
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <!-- Center the column -->
-
-                            <!-- Center the button -->
-
-
-                        </div>
-                    </div>
-                    <!-- summary-button -->
-                </div>
-                <!-- Content for Whiskey tab  end-->
-
-                <!-- Content for Gin tab -->
-                <div class="tab-pane fade" id="Gin" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">BEERS</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/mac.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-
-                    <!-- row-end -->
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <!-- Center the column -->
-                            <div class="col-sm-12 text-center">
-                                <!-- Center the button -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- summary-button -->
-                </div>
-                <!-- Content for Gin tab  end-->
-
-                <!-- Content for Tequila tab -->
-                <div class="tab-pane fade" id="Tequila" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">Tequila</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/big.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-
-                    <!-- row-end -->
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <!-- Center the column -->
-                            <div class="col-sm-12 text-center">
-                                <!-- Center the button -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- summary-button -->
-                </div>
-                <!-- Content for Tequila tab end -->
-
-                <!-- Content for Anise tab -->
-                <div class="tab-pane fade" id="Anise" role="tabpanel" aria-labelledby="profile-tab">
-
-                    <!-- heading start -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">Anise</h4>
-                        </div>
-                    </div>
-
-                    <!-- heading end -->
-                    <!-- row start -->
-                    <div class="row mt-3">
-
-                        <!-- col-6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/big.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- col-6-second start -->
-                    </div>
-                    <!-- row-end -->
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <!-- Center the column -->
-                            <div class="col-sm-12 text-center">
-                                <!-- Center the button -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- summary-button -->
-                </div>
-
-                <!-- Content for Anise tab  end-->
-
-                <!-- Content for Rum tab -->
-                <div class="tab-pane fade" id="Rum" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">Rum</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/big.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/big.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-
-                    <!-- row-end -->
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <!-- Center the column -->
-                            <div class="col-sm-12 text-center">
-                                <!-- Center the button -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- summary-button -->
-                </div>
-                <!-- Content for Rum tab  end-->
-
-                <!-- Content for Aperitif tab -->
-                <div class="tab-pane fade" id="Aperitif" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">Aperitif</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/big.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/mac.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-
-                    <!-- row-end -->
-
-                    <!-- summary-button -->
-                </div>
-                <!-- Content for Aperitif tab end-->
-
-                <!-- Content for Dejstif tab -->
-                <div class="tab-pane fade" id="Dejstif" role="tabpanel" aria-labelledby="contact-tab">
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">Dejstif</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/mac.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-                    <!-- heading start -->
-
-
-                    <!-- summary-button -->
-                </div>
-                <!-- Content for Dejstif tab  end-->
-
-                <!-- Content for Liquor tab -->
-                <div class="tab-pane fade" id="Liquor" role="tabpanel" aria-labelledby="contact-tab">
-
-                    <!-- heading start -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">Liquor</h4>
-                        </div>
-                    </div>
-
-                    <!-- heading end -->
-                    <!-- row start -->
-                    <div class="row mt-3">
-
-                        <!-- col-6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- col-6-second start -->
-                    </div>
-                    <!-- row-end -->
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <!-- Center the column -->
-                            <div class="col-sm-12 text-center">
-                                <!-- Center the button -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- summary-button -->
-                </div>
-                <!-- Content for Liquor tab  end-->
-
-                <!-- Content for Cognac tab -->
-                <div class="tab-pane fade" id="cognac" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">cognac</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/big.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/big.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-
-                    <!-- heading start -->
-
-                    <!-- row-end -->
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <!-- Center the column -->
-                            <div class="col-sm-12 text-center">
-                                <!-- Center the button -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- summary-button -->
-                </div>
-
-                <!-- Content for Cognac tab  end-->
-
-                <!-- Content for White wine tab -->
-                <div class="tab-pane fade" id="White" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">White Wine</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/big.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-
-
-                                    <tr></tr>
-                                    <td class="col-sm-8 col-md-6">
-                                        <div class="media">
-                                            <img class="media-object img-fluid" src="assets/img/big.png" />
-                                            <div class="media-body-cart">
-                                                <h4 class="media-heading">Product name</h4>
-                                                <p class="media-about">NIS 36</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                    <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                    <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                    <td class="col-sm-1 col-md-1">
-                                        <input type="email" class="form-control" id="exampleInputEmail1"
-                                            value="3" />
-                                    </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-                    <!-- row-end -->
-
-
-
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <!-- Center the column -->
-                            <div class="col-sm-12 text-center">
-                                <!-- Center the button -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- summary-button -->
-                </div>
-                <!-- Content for White wine tab end -->
-
-                <!-- Content for Red wine tab -->
-                <div class="tab-pane fade" id="Red" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">BEERS</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/mac.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-
-                    <!-- cart start -->
-
-                    <!-- colomn end -->
-
-                    <!-- heading start -->
-
-                    <!-- row-end -->
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <!-- Center the column -->
-                            <div class="col-sm-12 text-center">
-                                <!-- Center the button -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- summary-button -->
-                </div>
-
-                <!-- Content for Red wine tab  end-->
-
-                <!-- Content for Sparkling tab -->
-                <div class="tab-pane fade" id="Sparkling" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">BEERS</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/mac.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-
-                    <!-- second side col 6 start -->
-
-                    <!-- colomn end -->
-
-                    <!-- heading start -->
-
-
-
-                    <!-- summary-button -->
-                </div>
-                <!-- Content for Sparkling tab  end-->
-
-                <!-- Content for Rosé wine tab -->
-                <div class="tab-pane fade" id="Rosé" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">BEERS</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/big.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/big.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-
-                    <!-- row-end -->
-
-                    <!-- summary-button -->
-                </div>
-                <!-- Content for Rosé wine tab end-->
-
-                <!-- Content for Cocktails tab -->
-                <div class="tab-pane fade" id="Cocktails" role="tabpanel" aria-labelledby="contact-tab">
-
-                    <!-- colomn end -->
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4 class="tabs-des">Whiskey</h4>
-                        </div>
-                    </div>
-
-                    <!-- cart start -->
-                    <div class="row mt-3">
-                        <!-- first side col 6 start -->
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/sol.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Corona Bottle</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="vertical 12 d-none d-lg-block"></div>
-
-                        <div class="col-sm-6">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <img class="media-object img-fluid" src="assets/img/mac.png" />
-                                                <div class="media-body-cart">
-                                                    <h4 class="media-heading">Product name</h4>
-                                                    <p class="media-about">NIS 36</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center;"></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                value="3" />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- second side col 6 start -->
-
-                        <!-- colomn end -->
-                    </div>
-                    <!-- heading start -->
-
-
-                    <!-- Content for Cocktails tab end -->
-                </div>
-
-
-
+            <div class="tab-pane fade show active" id="All" role="tabpanel" aria-labelledby="home-tab">
+                @include('website.pages.products_list')
             </div>
+        </div>
+        <input type="hidden" id="category" value="all">
+
+        <div class="container">
+            <div class="row justify-content-center">
+
+                <div class="col-sm-12 text-center">
+
+                    <a href="javascript:void(0)" class="btn btn-primary welcome-btn" id="loadMoreBtn">Load More</a>
+                </div>
+            </div>
+        </div>
+
 
     </section>
-    <!-- tabs-end -->
 
 
 
@@ -1656,12 +80,209 @@
     <!-- order-summary-button -->
     <div class="row summary-section">
         <div class="col-sm-12">
-            <a href="#" class="btn btn-primary summary-btn"> <span><img src="assets/img/shopping.png"
-                        alt=""></span> Order Summary</a>
+            <a href="javascript:void(0)" id="orderSummary" class="btn btn-primary summary-btn" data-toggle="modal">
+                <span><img src="{{ asset('web_assets/img/shopping.png') }}" alt=""></span> Order Summary</a>
         </div>
     </div>
 
+    <div class="modal fade" id="orderSummaryModal" tabindex="-1" role="dialog" aria-labelledby="orderSummaryModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+
+
+                <button type="button" class="close d-none d-none" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row summary-section">
+                    <div class="col-sm-12">
+                        <a href="menu.php" class="btn btn-primary summary-btn ty"> <span><img src="assets/img/shopping.png"
+                                    alt=""></span> Order Summary</a>
+                    </div>
+                </div>
+
+                <!-- order-summary-button-end -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="order-descripation">Use This Handy Memory Device To Quickly Recall What You Want To
+                            Order
+                            And Show It To Your Waiter.</h3>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row table-background ">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+
+                                <div class="panel-body">
+                                    <div class="">
+                                        <table class="table" id="cart_table">
+                                            <thead>
+                                                <tr class="border-b">
+                                                    <th class="text-center table-font ">S.No</strong></th>
+                                                    <th class="text-left table-font">Item(S)</th>
+                                                    <th class="text-center table-font">Quantity</th>
+                                                    <th class="table-font text-center">Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-center">1</td>
+                                                    <td class="text-left">Corona bottle</td>
+                                                    <td class="text-center">1</td>
+                                                    <td class="text-center">03</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">2</td>
+                                                    <td class="text-left">A large Heineken</td>
+                                                    <td class="text-center">3</td>
+                                                    <td class="text-center">04</td>
+                                                </tr>
+                                                <tr class="border-b">
+                                                    <td class="text-center">3</td>
+                                                    <td class="text-left">Big Goldstar</td>
+                                                    <td class="text-center">1</td>
+                                                    <td class="text-center">05</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="text-left"> <Strong>Total</Strong></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"><Strong>12<Strong></td>
+                                                    <td><Strong>423</Strong></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="order-bottom">To place your order, please fill in your details below.</h3>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
     <!-- order-summary-button-end -->
 @endsection
 @section('script')
+    <script>
+        $(document).ready(function() {
+            var slug = '{{ $data['menu']->slug }}';
+            var get_category = 'all'
+
+            function loadMoreData(page) {
+                let url = '{{ route('website.menus') }}' + '?page=' + page + '&slug=' + slug + '&category=' +
+                    get_category;
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function(response) {
+
+                        $('#All').append(response);
+
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+
+            function loadMoreData1(page) {
+                let url = '{{ route('website.menus') }}' + '?page=' + page + '&slug=' + slug + '&category=' +
+                    get_category;
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function(response) {
+
+                        $('#All').html('');
+                        $('#All').html(response);
+
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+
+            function addCart(product_id, qty) {
+
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('website.cart') }}",
+                    data: {
+                        product_id: product_id,
+                        qty: qty,
+                    },
+                    success: function(response) {
+                        $('#cart_table tbody').empty();
+                        $('#cart_table tbody').append(response);
+                    }
+                });
+
+                return false;
+            }
+
+            $("#orderSummary").click(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('website.order_summary') }}",
+                    success: function(response) {
+
+                        $('#cart_table tbody').empty();
+                        $('#cart_table tbody').append(response);
+                        $('#orderSummaryModal').modal('show');
+                    }
+                });
+
+            });
+            $(".nav-item").click(function(e) {
+                get_category = $(this).attr('data-category-slug');
+                $("#category").val(get_category);
+                loadMoreData1(1)
+            });
+            $('.categories-list').on('click', function(e) {
+                get_category = $(this).attr('data-category-slug');
+                $("#category").val(get_category);
+                loadMoreData1(1)
+            });
+
+            $('#loadMoreBtn').click(function(e) {
+                e.preventDefault();
+                let nextPage = parseInt($('#currentPage').val()) + 1;
+                $('#currentPage').val(nextPage)
+                loadMoreData(nextPage);
+            });
+
+            $(document).on('click', '.increase_btn', function() {
+                var element = $(this).parent('.cart-div')
+                var product_id = element.attr('data-product-id');
+                var qty = element.children('.qty-input').val();
+                addCart(product_id, qty)
+            });
+            $(document).on('click', '.decrease_btn', function() {
+                var element = $(this).parent('.cart-div')
+                var product_id = element.attr('data-product-id');
+                var qty = element.children('.qty-input').val();
+                addCart(product_id, qty)
+            });
+
+        });
+    </script>
 @endsection

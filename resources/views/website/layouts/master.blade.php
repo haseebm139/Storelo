@@ -31,7 +31,7 @@
                 <div class="collapse navbar-collapse flex-1 nav-background" id="navbar-collapse">
                     <ul class="nav navbar-nav w-100">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php">EAT Storelo</a>
+                            <a class="nav-link" href="{{ route('home') }}">EAT Storelo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="menu.php">Drink</a>
@@ -67,6 +67,33 @@
 
 
     <!-- footer -->
+    <section class="about-us">
+        <div class="row">
+            <div class="col-sm-6 about-us-bg ">
+                <div class="welcome-body">
+
+                    <h4 class="about-us-des">ABOUT US</h4>
+                    <h5 class="about-us-descripation">WORKING-HOURS</h5>
+                    <p class="about-us-text-title">Sunday - Saturday  01:00 – 08:00</p>
+                    <h5 class="about-us-descripation">CONTACT:</h5>
+                    <p class="about-us-text-title">077-9800400</p>
+                    <h5 class="about-us-descripation">EMAIL:</h5>
+                    <p class="about-us-text-title">stolero.tlv@gmail.com</p>
+                    <h5 class="about-us-descripation">WEBSITE</h5>
+                    <p class="about-us-text-title">stolero.tlv@gmail.com</p>
+                    <h5 class="about-us-descripation">ADDRESS</h5>
+                    <p class="about-us-text-title">Eliezer Perry 14 Tel Aviv</p>
+
+
+                </div>
+            </div>
+            <div class="col-sm-6 map-colomn">
+                <!--<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d117223.77996815204!2d85.3213263!3d23.3432048!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x11b5a9b0042eef56!2sourcita.com!5e0!3m2!1sen!2sin!4v1589706571407!5m2!1sen!2sin" width="100%" height="570" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>-->
+                <img src="{{ asset('web_assets/img/map.png') }}" class="img" style="height: 586px; width: 936px;"
+                    alt="">
+            </div>
+        </div>
+    </section>
     <section class="footer-bg">
         <div class="container">
             <div class="row footer-top">
@@ -77,21 +104,20 @@
                 <div class="col-sm-6 foam-bg">
 
 
-                    <form class="footer-foam">
+                    <form class="footer-foam" action="{{ route('website.mailing-list') }}" method="POST">
+                        @csrf
                         <h3 class="foam-heading">JOIN OUR MAILING LIST</h3>
                         <div class="form-group">
-
-                            <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
 
-                            <input type="email" class="form-control" id="email" placeholder="Email Address"
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Email Address"
                                 required>
                         </div>
                         <div class="form-group">
+                            <input type="date" id="start" name="d_o_b" />
 
-                            <input type="text" class="form-control" id="dob"
-                                placeholder="Select Your Date of Birth" required>
                         </div>
                         <button type="submit" class="btn btn-primary footer-foam-btn">Send Message</button>
                     </form>
@@ -124,24 +150,10 @@
 
 
     </section>
-
-    @yield('script')
-
-
-
-
-
-
-
-
-
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
     </script>
@@ -214,8 +226,17 @@
                 ]
             });
         });
-    </script>
 
+        function toggleTab(tabName) {
+            $('.nav-link').removeClass('active');
+            $('.tab-pane').removeClass('active');
+            $('.tab-pane').removeClass('show');
+            $('.nav-link[href="#' + tabName + '"]').addClass('active');
+            $('.tab-pane[id="' + tabName + '"]').addClass('active');
+            $('.tab-pane[id="' + tabName + '"]').addClass('show');
+        }
+    </script>
+    @yield('script')
     <!--
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

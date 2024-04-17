@@ -1,5 +1,20 @@
 <?php
-
+if (!function_exists('getValue')) {
+    /**
+     * Get cart qty
+     *
+     * @return void
+    */
+    function getValue($product_id)
+    {
+        $cartItem = \Cart::get($product_id);
+        if ($cartItem !== null) {
+            return $cartItem['quantity'];
+        } else {
+            return 0;
+        }
+    }
+}
 if (!function_exists('theme')) {
     function theme()
     {

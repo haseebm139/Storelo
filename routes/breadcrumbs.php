@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Event;
 
+
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 use Spatie\Permission\Models\Role;
@@ -116,3 +117,18 @@ Breadcrumbs::for('product-management.events.show', function (BreadcrumbTrail $tr
     $trail->push(ucwords($data->name), route('product-management.events.show', $data));
 });
 /* end::Events */
+
+
+
+/* begin::special products */
+Breadcrumbs::for('product-management.special-products.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Special Products', route('product-management.special-products.index'));
+
+});
+Breadcrumbs::for('product-management.special-products.show', function (BreadcrumbTrail $trail, SpecialProduct $data) {
+
+    $trail->parent('product-management.special-products.index');
+    $trail->push(ucwords('aaaa'), route('product-management.special-products.show', $data));
+});
+/* end::special products */

@@ -13,6 +13,7 @@ use App\Http\Controllers\Apps\Admin\MenuController;
 use App\Http\Controllers\Apps\Admin\CategoryController;
 use App\Http\Controllers\Apps\Admin\ProductController;
 use App\Http\Controllers\Apps\Admin\EventController;
+use App\Http\Controllers\Apps\Admin\SpecialProductController;
 use App\Http\Controllers\Webs\HomeController;
 
 /*
@@ -50,28 +51,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::resource('/events', EventController::class);
         Route::get('events-change-status', [EventController::class,'change_status'])->name('events.change.status');
+
+        Route::resource('/special-products', SpecialProductController::class);
+        Route::get('special-products-change-status', [SpecialProductController::class,'change_status'])->name('special-products.change.status');
     });
 
-    Route::name('business.')->group(function () {
-        Route::resource('business/business-registration', BusinessRegistrationController::class);
-        Route::resource('business/business-renewal', BusinessRegistrationController::class);
-        Route::resource('business/labour', BusinessLabourController::class);
-        Route::resource('business/form-fee', FormFeeController::class);
-    });
-    Route::name('labour.visa.')->group(function () {
 
-        Route::resource('business/labour-visa/offer-letter', LabourVisaController::class);
-        Route::resource('business/labour-visa/labour-insurance', LabourVisaController::class);
-        Route::resource('business/labour-visa/labour-fee', LabourVisaController::class);
-        Route::resource('business/labour-visa/entry-permit', LabourVisaController::class);
-        Route::resource('business/labour-visa/change-status', LabourVisaController::class);
-        Route::resource('business/labour-visa/health-insurance', LabourVisaController::class);
-        Route::resource('business/labour-visa/medical-examination-typing', LabourVisaController::class);
-        Route::resource('business/labour-visa/emirates-id-typing', LabourVisaController::class);
-        Route::resource('business/labour-visa/stamping-visa', LabourVisaController::class);
-        Route::resource('business/labour-visa/final-contract', LabourVisaController::class);
-
-    });
 
     Route::resource('image/upload', ImageUpload::class);
 
@@ -88,7 +73,11 @@ Route::get('/error', function () {
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
-    Route::get('menu', 'product')->name('product');
+    Route::get('menus', 'product')->name('website.menus');
+    Route::get('cart', 'cart')->name('website.cart');
+    Route::get('order_summary', 'createSummary')->name('website.order_summary');
+    Route::POST('mailing-list', 'saveIntoMailingList')->name('website.mailing-list');
+
 });
 Route::get('/auth/redirect/{provider}', [SocialiteController::class, 'redirect']);
 
