@@ -107,9 +107,10 @@
                                             <!--end::Label-->
 
                                             <!--begin::Input-->
-                                            <select class="form-select form-select-solid form-select-sm" name="menu_id" data-control="select2">
+                                            <select class="form-select form-select-solid form-select-sm" name="menu_id"
+                                                data-control="select2">
                                                 @foreach ($menu as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                             <!--end::Input-->
@@ -175,7 +176,7 @@
                             @foreach ($data as $item)
                                 <tr>
 
-                                    <td>{{ $item->menu->name??'' }}</td>
+                                    <td>{{ $item->menu->name ?? '' }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>
                                         <div class="form-group">

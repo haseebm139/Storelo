@@ -452,8 +452,8 @@ img.media-object.img-fluid {
 a.btn.btn-primary.summary-btn {
     width: 100%;
     height: auto;
-    background: #555555;
-    border: 4px double #555555;
+    background: #C7803F;
+    border: 4px double #C7803F;
 }
 
 body.ord {
@@ -497,6 +497,14 @@ tr.border-b {
 
 .table-background {
     background: white;
+    padding-top: 60px;
+    padding-bottom: 42px;
+    padding-left: 70px;
+    padding-right: 70px;
+    width: 75%;
+    margin-left: 125px;
+    border: solid 1px;
+    border-radius: 6px;
 }
 
 h3.order-bottom {
@@ -580,11 +588,25 @@ button#dropdownMenuButton {
     text-decoration-style: initial;
     counter-reset: initial;
 }
+
 .dropdown-menu {
     left: 50% !important;
     top: 100% !important;
     transform: translateX(-50%) !important;
 }
+
+.about-body {
+    margin-right: 25px;
+    margin-left: 25px;
+    padding-right: -12px;
+    padding-left: -12px;
+    float: left;
+    align-items: center;
+    text-align: left;
+    display: block;
+
+}
+
 input#start {
 
     display: block;
@@ -602,23 +624,94 @@ input#start {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     border-bottom: 1px solid #cfcfcf;
 }
+
 .form-control:focus {
     color: #495057;
     background-color: #fff;
     border-color: #000000;
     outline: 0;
-    box-shadow: 0 0 0 0.1rem rgba(26, 25, 25, 0.93);
+    box-shadow: 0 0 0 0.1rem rgb(26 25 25 / 93%);
 }
 
 p#test {
     color: black;
 }
-.card:hover p#test{
+
+.card:hover p#test {
     color: #C7803F;
     text-decoration: none;
 }
-.col-text-underline a{
+
+.col-text-underline a {
     text-decoration: none;
 }
 
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    background: black !important;
+    opacity: 0.8;
+}
 
+thead {
+    background: #c7803f;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    color: white;
+}
+
+.center-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.f-input {
+    border: 1px solid;
+    color: #c7803f;
+    border-radius: 4px;
+}
+
+.f-select {
+    word-wrap: normal;
+    width: 42px;
+    border: 1px solid #c7803f;
+}
+
+.modal-body {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1rem;
+    background: none;
+}
+
+.about-btnn {
+    background: transparent;
+    color: rgb(255, 255, 255);
+    font-family: emoji;
+    border: 4px double #c7803f;
+
+}
+
+.foram {
+    margin-left: 145px;
+}
+
+.fo {
+    margin-left: -122px;
+}
+
+select#order {
+    border-radius: 4px;
+    padding: 5px;
+    width: 100px;
+
+}

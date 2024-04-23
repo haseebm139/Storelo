@@ -1,7 +1,8 @@
 <x-auth-layout>
 
     <!--begin::Form-->
-    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('dashboard') }}" action="{{ route('login') }}">
+    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('dashboard') }}"
+        action="{{ route('login') }}">
         @csrf
         <!--begin::Heading-->
         <div class="text-center mb-11">
@@ -22,14 +23,16 @@
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::Email-->
-            <input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" value="demo@demo.com"/>
+            <input type="text" placeholder="Email" name="email" autocomplete="off"
+                class="form-control bg-transparent" value="demo@demo.com" />
             <!--end::Email-->
         </div>
 
         <!--end::Input group--->
         <div class="fv-row mb-3">
             <!--begin::Password-->
-            <input type="password" placeholder="Password" name="password" autocomplete="off" class="form-control bg-transparent" value="demo"/>
+            <input type="password" placeholder="Password" name="password" autocomplete="off"
+                class="form-control bg-transparent" value="demo" />
             <!--end::Password-->
         </div>
         <!--end::Input group--->
@@ -38,11 +41,7 @@
         <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
             <div></div>
 
-            <!--begin::Link-->
-            <a href="{{ route('password.request') }}" class="link-primary">
-                Forgot Password ?
-            </a>
-            <!--end::Link-->
+
         </div>
         <!--end::Wrapper-->
 
@@ -54,15 +53,7 @@
         </div>
         <!--end::Submit button-->
 
-        <!--begin::Sign up-->
-        <div class="text-gray-500 text-center fw-semibold fs-6">
-            Not a Member yet?
 
-            <a href="{{ route('register') }}" class="link-primary">
-                Sign up
-            </a>
-        </div>
-        <!--end::Sign up-->
     </form>
     <!--end::Form-->
 

@@ -129,6 +129,20 @@ Breadcrumbs::for('product-management.special-products.index', function (Breadcru
 Breadcrumbs::for('product-management.special-products.show', function (BreadcrumbTrail $trail, SpecialProduct $data) {
 
     $trail->parent('product-management.special-products.index');
-    $trail->push(ucwords('aaaa'), route('product-management.special-products.show', $data));
+    $trail->push(ucwords($data->title), route('product-management.special-products.show', $data));
+});
+/* end::special products */
+
+
+/* begin::special products */
+Breadcrumbs::for('order-management.order.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Orders', route('order-management.order.index'));
+
+});
+Breadcrumbs::for('order-management.order.show', function (BreadcrumbTrail $trail, Order $data) {
+
+    $trail->parent('order-management.order.index');
+    $trail->push(ucwords('aaaa'), route('order-management.order.show', $data));
 });
 /* end::special products */

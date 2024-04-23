@@ -1,21 +1,5 @@
 @extends('website.layouts.master')
 @section('style')
-    <style>
-        .modal-content {
-            position: relative;
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            width: 100%;
-            pointer-events: auto;
-            background-color: transparent;
-            background-clip: padding-box;
-            border: 1px solid rgba(0, 0, 0, .2);
-            border-radius: .3rem;
-            outline: 0;
-        }
-    </style>
 @endsection
 @section('content')
     <section
@@ -108,7 +92,7 @@
                     <div class="modal-body">
                         <div class="row summary-section">
                             <div class="col-sm-12">
-                                <a href="#" class="btn btn-primary summary-btn ty close-summary-model"> <span><img
+                                <a href="#" class="btn btn-primary summary-btn ty"> <span><img
                                             src="{{ asset('web_assets/img/shopping.png') }}" alt=""></span> Order
                                     Summary</a>
                             </div>
@@ -134,16 +118,15 @@
                                                             <h1 style="font-family:cursive;">INVOICE</h1>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <img src="{{ asset('web_assets/img/print.png') }}"
-                                                                id="printButton" class="float-right"alt="">
+                                                            <img src="assets/img/print.png" class="float-right"alt="">
                                                         </div>
                                                     </div>
 
 
                                                     <br>
 
-                                                    {{-- <h6 style="font-family:cursive;">Name: MR.JOHN <span
-                                                            style="margin-left:33px;"> Phone:+123 456 789</span></h6> --}}
+                                                    <h6 style="font-family:cursive;">Name: MR.JOHN <span
+                                                            style="margin-left:33px;"> Phone:+123 456 789</span></h6>
 
 
                                                     <thead>
@@ -190,54 +173,43 @@
                             </div>
                         </div>
                         <br>
-                        <form action="{{ route('website.place-order') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-sm-2"></div>
-                                <div class="col-sm-4 foram">
-
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4 foram">
+                                <form action="#" method="post">
                                     <div>
                                         <label for="name">Your Name</label>
-                                        <input class="f-input" type="text" id="name" name="name" required>
+                                        <input type="text" id="name" name="name" required>
                                     </div>
-                                </div>
-                                <div class="col-sm-3 fo">
-                                    <label for="order">Table Number</label>
-                                    <select id="order" name="table_no" required class="f-select">
-                                        <option value="">Select Table</option>
-                                        <option value="1">01</option>
-                                        <option value="2">02</option>
-                                        <option value="3">03</option>
-                                        <option value="4">04</option>
-                                        <option value="5">05</option>
-                                        <option value="6">06</option>
-                                        <option value="7">07</option>
-                                        <option value="8">08</option>
-                                        <option value="9">09</option>
-                                        <option value="10">10</option>
-                                        <!-- Add more options as needed -->
-                                    </select>
-                                </div>
-
-
                             </div>
-                            <div class="col-sm-3"></div>
-                            <div class="row justify-content-center mt-4">
-                                <div class="col-sm-12 mx-auto text-center">
-                                    <button type="submit" class="btn btn-primary about-btnn"> Place Order</button>
-
-                                </div>
+                            <div class="col-sm-3 fo">
+                                <label for="order">Table Number</label>
+                                <select id="order" name="order" required>
+                                    <option value="">00</option>
+                                    <option value="001">Order #001</option>
+                                    <option value="002">Order #002</option>
+                                    <option value="003">Order #003</option>
+                                    <!-- Add more options as needed -->
+                                </select>
                             </div>
-                        </form>
+
+                            </form>
+                        </div>
+                        <div class="col-sm-3"></div>
                     </div>
 
 
 
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-sm-12 mx-auto text-center">
+                            <a href="#" class="btn btn-primary about-btnn">Place Order</a>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-sm-12">
                             <h3 class="order-bottom">To place your order, please fill in your details below.</h3>
-
+                            <button type="button" id="printButton" class="btn btn-primary">Print</button>
                         </div>
                     </div>
 
@@ -247,7 +219,101 @@
 
         </div>
     </div>
+    </div>
 
+
+
+    <div class="modal fade" id="orderSummaryModal1" tabindex="-1" role="dialog"
+        aria-labelledby="orderSummaryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close d-none d-none" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row summary-section">
+                    <div class="col-sm-12">
+                        <a href="#" class="btn btn-primary summary-btn ty"> <span><img
+                                    src="{{ asset('web_assets/img/shopping.png') }}" alt=""></span> Order
+                            Summary</a>
+                    </div>
+                </div>
+
+                <!-- order-summary-button-end -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="order-descripation">Use This Handy Memory Device To Quickly Recall What You Want To
+                            Order
+                            And Show It To Your Waiter.</h3>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row table-background ">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+
+                                <div class="panel-body">
+                                    <div class="">
+                                        <table class="table" id="cart_table">
+                                            <thead>
+                                                <tr class="border-b">
+                                                    <th class="text-center table-font ">S.No</strong></th>
+                                                    <th class="text-left table-font">Item(S)</th>
+                                                    <th class="text-center table-font">Quantity</th>
+                                                    <th class="table-font text-center">Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-center">1</td>
+                                                    <td class="text-left">Corona bottle</td>
+                                                    <td class="text-center">1</td>
+                                                    <td class="text-center">03</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">2</td>
+                                                    <td class="text-left">A large Heineken</td>
+                                                    <td class="text-center">3</td>
+                                                    <td class="text-center">04</td>
+                                                </tr>
+                                                <tr class="border-b">
+                                                    <td class="text-center">3</td>
+                                                    <td class="text-left">Big Goldstar</td>
+                                                    <td class="text-center">1</td>
+                                                    <td class="text-center">05</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="text-left"> <Strong>Total</Strong></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"><Strong>12<Strong></td>
+                                                    <td><Strong>423</Strong></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="order-bottom">To place your order, please fill in your details below.</h3>
+                        <button type="button" id="printButton1" class="btn btn-primary">Print</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <!-- order-summary-button-end -->
 @endsection
 @section('script')
     <script>
@@ -262,7 +328,7 @@
                     url: url,
                     type: 'GET',
                     success: function(response) {
-                        console.log(response);
+
                         $('#All').append(response);
 
                     },
@@ -323,10 +389,6 @@
                 });
 
             });
-            $(".close-summary-model").click(function(e) {
-                $('#orderSummaryModal').modal('hide');
-
-            });
             $(".nav-item").click(function(e) {
                 get_category = $(this).attr('data-category-slug');
                 $("#category").val(get_category);
@@ -336,6 +398,7 @@
                     $('#loadMoreBtn').addClass('d-none');
 
                 }
+                console.log(get_category);
                 loadMoreData1(1)
             });
             $('.categories-list').on('click', function(e) {

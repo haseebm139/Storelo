@@ -10,11 +10,57 @@ use App\Models\Product;
 use App\Models\Event;
 use App\Models\MailingList;
 use App\Models\SpecialProduct;
-
+use App\Models\Order;
+use App\Models\OrderItem;
+use Str;
 use Validator;
 use Illuminate\Validation\Rule;
 class HomeController extends Controller
 {
+
+    public function placeOrder(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'table_no' => 'required',
+
+        ]);
+
+        if($validator->fails()){
+
+            return redirect()->back()->with(['type'=>'error','message'=>$validator->errors()->first()]);
+        }
+        try {
+            # code...
+            $cart = $this->cartData();
+            if ($cart['cart']->count() > 0) {
+                # code...
+                $order_data['name'] = $request->name;
+                $order_data['table_no'] = $request->table_no;
+                $order_data['order_no'] = '#'.time();
+                $order_data['amount'] = $cart['total'];
+                $order = Order::create($order_data);
+
+                foreach ($cart['cart'] as $key => $value) {
+
+                    $order_item_data['order_id'] = $order->id;
+                    $order_item_data['product_id'] = $value['id'];
+                    $order_item_data['price'] = $value['price'];
+                    $order_item_data['qty'] = $value['quantity'];
+                    OrderItem::create($order_item_data);
+
+                }
+
+
+                return redirect()->back()->with(['type'=>'success','message'=>"Order Place Successfully"]);
+            }
+
+            return redirect()->back()->with(['type'=>'error','message'=>"Cart is Empty"]);
+        } catch (\Throwable $e) {
+
+            return redirect()->back()->with(['type'=>'error','message'=>"Something went wrong"]);
+        }
+
+    }
 
     public function saveIntoMailingList(Request $request){
 

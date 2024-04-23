@@ -15,7 +15,8 @@
     <link rel="icon" type="image/png" href="{{ asset('web_assets/img/favicon.png') }}">
 
 
-    <title>@yield('title')</title>
+    <title>Eliran</title>
+    {{-- <title>@yield('title')</title> --}}
     @yield('style')
 </head>
 
@@ -43,8 +44,8 @@
                     </ul>
                 </div>
                 <div class="order-first order-md-0 d-flex justify-content-center">
-                    <a class="navbar-brand mx-0" href="{{ route('home') }}"><img src="{{ asset('web_assets/img/logo.png') }}"
-                            class="nav-img" alt=""></a>
+                    <a class="navbar-brand mx-0" href="{{ route('home') }}"><img
+                            src="{{ asset('web_assets/img/logo.png') }}" class="nav-img" alt=""></a>
                 </div>
                 <div class="collapse navbar-collapse flex-1 nav-background">
                     {{-- <ul class="nav navbar-nav ml-auto">
@@ -108,12 +109,13 @@
                         @csrf
                         <h3 class="foam-heading">JOIN OUR MAILING LIST</h3>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                            <input type="text" class="form-control" id="name" name="name"
+                                placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
 
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Email Address"
-                                required>
+                            <input type="email" class="form-control" name="email" id="email"
+                                placeholder="Email Address" required>
                         </div>
                         <div class="form-group">
                             <input type="date" id="start" name="d_o_b" />

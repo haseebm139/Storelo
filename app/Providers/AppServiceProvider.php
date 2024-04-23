@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Core\KTBootstrap;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Pagination\Paginator;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Update defaultStringLength
         Builder::defaultStringLength(191);
-
+        Paginator::useBootstrap();
         KTBootstrap::init();
     }
 }

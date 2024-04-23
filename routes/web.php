@@ -14,6 +14,9 @@ use App\Http\Controllers\Apps\Admin\CategoryController;
 use App\Http\Controllers\Apps\Admin\ProductController;
 use App\Http\Controllers\Apps\Admin\EventController;
 use App\Http\Controllers\Apps\Admin\SpecialProductController;
+use App\Http\Controllers\Apps\Admin\OrderController;
+
+
 use App\Http\Controllers\Webs\HomeController;
 
 /*
@@ -56,7 +59,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('special-products-change-status', [SpecialProductController::class,'change_status'])->name('special-products.change.status');
     });
 
-
+    Route::name('order-management.')->group(function () {
+        Route::resource('/order', OrderController::class);
+        Route::get('get-order-details', [OrderController::class,'getOrderDetails'])->name('get.order.details');
+    });
 
     Route::resource('image/upload', ImageUpload::class);
 
@@ -77,6 +83,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('cart', 'cart')->name('website.cart');
     Route::get('order_summary', 'createSummary')->name('website.order_summary');
     Route::POST('mailing-list', 'saveIntoMailingList')->name('website.mailing-list');
+    Route::POST('place-order', 'placeOrder')->name('website.place-order');
 
 });
 Route::get('/auth/redirect/{provider}', [SocialiteController::class, 'redirect']);
