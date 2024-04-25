@@ -120,13 +120,29 @@
                                         <div class="fv-row mb-7">
                                             <!--begin::Label-->
                                             <label class="required fw-semibold fs-6 mb-2" name="name">Category
-                                                Name</label>
+                                                Name In English</label>
                                             <!--end::Label-->
 
                                             <!--begin::Input-->
                                             <input type="text" name="name"
                                                 class="form-control form-control-solid mb-3 mb-lg-0"
-                                                placeholder="Enter Category Name" />
+                                                placeholder="Category
+                                                Name In English" />
+                                            <!--end::Input-->
+                                        </div>
+
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="required fw-semibold fs-6 mb-2" name="name">Category
+                                                Name In Hebrew</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input type="text" name="name_in_he"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="Category
+                                                Name In Hebrew" />
                                             <!--end::Input-->
                                         </div>
 
@@ -165,7 +181,8 @@
 
 
                             <th class="min-w-125px">Menu Name</th>
-                            <th class="min-w-125px">Category Name</th>
+                            <th class="min-w-125px">Category Name In English</th>
+                            <th class="min-w-125px">Category Name In Hebrew</th>
                             <th class="min-w-125px">Status</th>
                             <th class="text-end min-w-70px">Action</th>
                         </tr>
@@ -178,6 +195,7 @@
 
                                     <td>{{ $item->menu->name ?? '' }}</td>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ $item->name_in_he }}</td>
                                     <td>
                                         <div class="form-group">
                                             <div

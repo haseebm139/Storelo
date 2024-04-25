@@ -34,8 +34,10 @@ class EventController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
+            'title_in_he' => 'required',
             'image' =>'required',
             'description' =>'required',
+            'description_in_he' =>'required',
 
         ]);
 
@@ -53,7 +55,9 @@ class EventController extends Controller
             }
 
             $input['title'] = $request->title;
+            $input['title_in_he'] = $request->title_in_he;
             $input['description'] =$request->description;
+            $input['description_in_he'] =$request->description_in_he;
 
             Event::create(
                 $input
@@ -99,6 +103,12 @@ class EventController extends Controller
             }
             if ($request->description) {
                 $input['description']  = $request->description;
+            }
+            if ($request->description_in_he) {
+                $input['description_in_he']  = $request->description_in_he;
+            }
+            if ($request->title_in_he) {
+                $input['title_in_he']  = $request->title_in_he;
             }
             if($request->hasFile('image'))
             {

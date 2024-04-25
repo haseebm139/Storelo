@@ -99,12 +99,25 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2" name="name">Product Name</label>
+                            <label class="required fw-semibold fs-6 mb-2" name="name">Product Name In English</label>
                             <!--end::Label-->
 
                             <!--begin::Input-->
                             <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0"
-                                placeholder="Enter Name" value="{{ $data->name ?? '' }}" />
+                                placeholder="Enter Name In English" value="{{ $data->name ?? '' }}" />
+                            <!--end::Input-->
+                        </div>
+
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2" name="name_in_he">Product Name In
+                                Hebrew</label>
+                            <!--end::Label-->
+
+                            <!--begin::Input-->
+                            <input type="text" name="name_in_he" class="form-control form-control-solid mb-3 mb-lg-0"
+                                placeholder="Enter Name In Hebrew" value="{{ $data->name_in_he ?? '' }}" />
                             <!--end::Input-->
                         </div>
                         <!--begin::Image input placeholder-->
@@ -119,7 +132,9 @@
                             <select class="form-select form-select-solid form-select-md" name="menu_id"
                                 data-control="select2">
                                 @foreach ($menus as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}@if ($data->menu_id == $item->id) @selected(true) @endif
+                                    <option value="{{ $item->id }}">{{ $item->name }}@if ($data->menu_id == $item->id)
+                                            @selected(true)
+                                        @endif
                                     </option>
                                 @endforeach
                             </select>

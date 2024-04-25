@@ -37,6 +37,7 @@ class CategoryController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'name_in_he' => 'required',
             'menu_id' => 'required',
 
         ]);
@@ -49,6 +50,7 @@ class CategoryController extends Controller
             $slug = Str::slug($request->name);
             $uniqueSlug = $this->makeUniqueSlug($slug);
             $input['name'] = $request->name;
+            $input['name_in_he'] = $request->name_in_he;
             $input['slug'] =$uniqueSlug;
             $input['menu_id'] =$request->menu_id;
 
@@ -99,6 +101,11 @@ class CategoryController extends Controller
                 $uniqueSlug = $this->makeUniqueSlug($slug);
                 $input['slug'] =$uniqueSlug;
             }
+            if ($request->name_in_he != $data->name_in_he) {
+                $input['name_in_he']  = $request->name;
+
+            }
+
             if ($request->menu_id != $data->menu_id) {
                 $input['menu_id']  = $request->menu_id;
             }

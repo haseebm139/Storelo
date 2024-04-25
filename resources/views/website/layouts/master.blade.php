@@ -14,50 +14,63 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/png" href="{{ asset('web_assets/img/favicon.png') }}">
 
-
     <title>Eliran</title>
-    {{-- <title>@yield('title')</title> --}}
+    <!--<title>@yield('title')</title>-->
     @yield('style')
 </head>
 
 <body>
+
     {{-- Header --}}
     <header>
+        @php
+            $image = $website->logo ?? 'assets/img/nav-back.png';
+        @endphp
         <nav class="navbar navbar-expand-md navbar-dark  main-nav fixed-top"
-            style="background: url(assets/img/nav-back.png);">
+            style="background: url({{ $image }});">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse flex-1 nav-background" id="navbar-collapse">
                     <ul class="nav navbar-nav w-100">
+                        @if (isset($menu[0]))
+                            @foreach ($menu as $item)
+                                @if ($item->slug == 'main-dishes')
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                            href="{{ route('website.menus', ['slug' => $item->slug]) }}">EAT Storelo</a>
+                                    </li>
+                                @endif
+                                @if ($item->slug == 'alcohol')
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                            href="{{ route('website.menus', ['slug' => $item->slug]) }}">Drink</a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        @endif
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}">EAT Storelo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Drink</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Main Menu</a>
+                            <a class="nav-link" href="{{ route('home') }}">Main Menu</a>
                         </li>
 
                     </ul>
                 </div>
                 <div class="order-first order-md-0 d-flex justify-content-center">
-                    <a class="navbar-brand mx-0" href="{{ route('home') }}"><img
-                            src="{{ asset('web_assets/img/logo.png') }}" class="nav-img" alt=""></a>
+                    <a class="navbar-brand mx-0" href="{{ route('home') }}"><img src="{{ asset($image) }}"
+                            class="nav-img" alt=""></a>
                 </div>
                 <div class="collapse navbar-collapse flex-1 nav-background">
-                    {{-- <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><img src="{{ asset('web_assets/img/group.png') }}"
-                                    class="nav-img" alt=""></a>
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item language1" data-language="en">
+                            <a class="nav-link" href="{{ route('changeLang', ['lang' => 'en']) }}"><img
+                                    src="{{ asset('web_assets/img/group.png') }}" class="nav-img" alt=""></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-flag" href="#"><img
+                        <li class="nav-item language1" data-language="he">
+                            <a class="nav-link nav-flag" href="{{ route('changeLang', ['lang' => 'he']) }}"><img
                                     src="{{ asset('web_assets/img/flag2.png') }}" class="nav-img" alt=""></a>
                         </li>
-                    </ul> --}}
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -72,18 +85,32 @@
         <div class="row">
             <div class="col-sm-6 about-us-bg ">
                 <div class="welcome-body">
+                    @php
+                        $working_hours = '';
+                        $contact = $website->contact ?? '';
+                        $email = $website->email ?? '';
+                        $website_url = $website->website_url ?? '';
+                        $address = '';
 
-                    <h4 class="about-us-des">ABOUT US</h4>
-                    <h5 class="about-us-descripation">WORKING-HOURS</h5>
-                    <p class="about-us-text-title">Sunday - Saturday  01:00 – 08:00</p>
-                    <h5 class="about-us-descripation">CONTACT:</h5>
-                    <p class="about-us-text-title">077-9800400</p>
-                    <h5 class="about-us-descripation">EMAIL:</h5>
-                    <p class="about-us-text-title">stolero.tlv@gmail.com</p>
-                    <h5 class="about-us-descripation">WEBSITE</h5>
-                    <p class="about-us-text-title">stolero.tlv@gmail.com</p>
-                    <h5 class="about-us-descripation">ADDRESS</h5>
-                    <p class="about-us-text-title">Eliezer Perry 14 Tel Aviv</p>
+                        if ($lang == 'he') {
+                            $working_hours = $website->working_hours_in_hebrew ?? '';
+                            $address = $website->address_in_hebrew ?? '';
+                        } else {
+                            $working_hours = $website->working_hours ?? '';
+                            $address = $website->address ?? '';
+                        }
+                    @endphp
+                    <h4 class="about-us-des">{{ __('home.about_us') }}</h4>
+                    <h5 class="about-us-descripation">{{ __('home.working_hours') }}</h5>
+                    <p class="about-us-text-title">{{ $working_hours }}</p>
+                    <h5 class="about-us-descripation">{{ __('home.contact') }}:</h5>
+                    <p class="about-us-text-title">{{ $contact }}</p>
+                    <h5 class="about-us-descripation">{{ __('home.email') }}:</h5>
+                    <p class="about-us-text-title">{{ $email }}</p>
+                    <h5 class="about-us-descripation">{{ __('home.website') }}</h5>
+                    <p class="about-us-text-title">{{ $website_url }}</p>
+                    <h5 class="about-us-descripation">{{ __('home.address') }}</h5>
+                    <p class="about-us-text-title">{{ $address }}</p>
 
 
                 </div>
@@ -107,21 +134,22 @@
 
                     <form class="footer-foam" action="{{ route('website.mailing-list') }}" method="POST">
                         @csrf
-                        <h3 class="foam-heading">JOIN OUR MAILING LIST</h3>
+                        <h3 class="foam-heading">{{ __('home.form_heading') }}</h3>
                         <div class="form-group">
                             <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Your Name" required>
+                                placeholder="{{ __('home.your_name') }}" required>
                         </div>
                         <div class="form-group">
 
                             <input type="email" class="form-control" name="email" id="email"
-                                placeholder="Email Address" required>
+                                placeholder="{{ __('home.email') }}" required>
                         </div>
                         <div class="form-group">
                             <input type="date" id="start" name="d_o_b" />
 
                         </div>
-                        <button type="submit" class="btn btn-primary footer-foam-btn">Send Message</button>
+                        <button type="submit"
+                            class="btn btn-primary footer-foam-btn">{{ __('home.send_message') }}</button>
                     </form>
 
                 </div>
@@ -237,6 +265,14 @@
             $('.tab-pane[id="' + tabName + '"]').addClass('active');
             $('.tab-pane[id="' + tabName + '"]').addClass('show');
         }
+
+        var url = "{{ route('changeLang') }}";
+
+        $(".language").click(function() {
+            var selectedLanguage = $(this).data("language");
+            console.log(selectedLanguage);
+            window.location.href = url + "?lang=" + selectedLanguage;
+        });
     </script>
     @yield('script')
     <!--

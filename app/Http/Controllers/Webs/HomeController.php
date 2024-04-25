@@ -12,12 +12,23 @@ use App\Models\MailingList;
 use App\Models\SpecialProduct;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Slider;
 use Str;
 use Validator;
+use Illuminate\Support\Facades\App;
+
 use Illuminate\Validation\Rule;
 class HomeController extends Controller
 {
 
+    public function changeLang(Request $request)
+    {
+        // return $currentLocale = app()->getLocale();
+        App::setLocale($request->lang);
+        session()->put('locale', $request->lang);
+
+        return redirect()->back();
+    }
     public function placeOrder(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -81,6 +92,7 @@ class HomeController extends Controller
         return redirect()->back();
     }
     public function index(){
+        $data['slider'] = Slider::where('status',1)->get();
         $data['menu'] = Menu::where('status',1)->get();
         $data['events'] = Event::where('status',1)->get();
         $data['special_products'] = SpecialProduct::where('status',1)->get();
@@ -108,6 +120,7 @@ class HomeController extends Controller
         if ($request->ajax()) {
             return view('website.pages.products_list',compact('data','page'));
         }
+
         return view('website.pages.menu',compact('data','page'));
     }
 

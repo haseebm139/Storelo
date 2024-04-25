@@ -5,6 +5,7 @@ use App\Models\Menu;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Event;
+use App\Models\Slider;
 
 
 use Diglactic\Breadcrumbs\Breadcrumbs;
@@ -134,6 +135,21 @@ Breadcrumbs::for('product-management.special-products.show', function (Breadcrum
 /* end::special products */
 
 
+
+
+/* begin::Slider */
+Breadcrumbs::for('product-management.slider.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Slider', route('product-management.slider.index'));
+
+});
+Breadcrumbs::for('product-management.slider.show', function (BreadcrumbTrail $trail, Slider $data) {
+
+    $trail->parent('product-management.slider.index');
+    $trail->push(ucwords($data->title), route('product-management.slider.show', $data));
+});
+/* end::Slider */
+
 /* begin::special products */
 Breadcrumbs::for('order-management.order.index', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
@@ -146,3 +162,16 @@ Breadcrumbs::for('order-management.order.show', function (BreadcrumbTrail $trail
     $trail->push(ucwords('aaaa'), route('order-management.order.show', $data));
 });
 /* end::special products */
+
+/* begin::Slider */
+Breadcrumbs::for('website-management.website.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Website Setting', route('website-management.website.index'));
+
+});
+Breadcrumbs::for('website-management.website.show', function (BreadcrumbTrail $trail, Slider $data) {
+
+    $trail->parent('website-management.website.index');
+    $trail->push(ucwords('Data'), route('website-management.website.show', $data));
+});
+/* end::Slider */

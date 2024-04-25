@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('category_id')->nullable();
             $table->string('image')->nullable();
             $table->string('name')->nullable();
+            $table->string('name_in_he')->nullable();
             $table->string('slug')->nullable()->unique();
             $table->decimal('price', 11, 2)->nullable();
             $table->decimal('sale_price', 11, 2)->nullable();

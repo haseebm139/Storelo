@@ -28,7 +28,7 @@
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
                     <div class="card-title">
-                        <h2 class="fw-bold">Edit Menu</h2>
+                        <h2 class="fw-bold">Edit Category</h2>
                     </div>
                 </div>
                 <!--end::Card header-->
@@ -49,11 +49,12 @@
                             <!--end::Label-->
 
                             <!--begin::Input-->
-                            <select class="form-select form-select-solid form-select-sm" name="menu_id" data-control="select2">
+                            <select class="form-select form-select-solid form-select-sm" name="menu_id"
+                                data-control="select2">
                                 @foreach ($menu as $item)
-                                <option value="{{ $item->id }}"  @if ($item->id == $data->menu_id)
-                                    @selected(true)
-                                @endif>{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}"
+                                        @if ($item->id == $data->menu_id) @selected(true) @endif>
+                                        {{ $item->name }}</option>
                                 @endforeach
                             </select>
                             <!--end::Input-->
@@ -61,15 +62,28 @@
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
                             <label class="required fw-semibold fs-6 mb-2" name="name">Category
-                                Name</label>
+                                Name In English</label>
                             <!--end::Label-->
 
                             <!--begin::Input-->
-                            <input type="text" name="name"
-                                class="form-control form-control-solid mb-3 mb-lg-0"
-                                placeholder="Enter Category Name" value="{{ $data->name ?? '' }}"  />
+                            <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0"
+                                placeholder="Enter Category Name In English" value="{{ $data->name ?? '' }}" />
                             <!--end::Input-->
                         </div>
+
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2" name="name_in_he">Category
+                                Name In Hebrew</label>
+                            <!--end::Label-->
+
+                            <!--begin::Input-->
+                            <input type="text" name="name_in_he" class="form-control form-control-solid mb-3 mb-lg-0"
+                                placeholder="Enter Category In Hebrew" value="{{ $data->name_in_he ?? '' }}" />
+                            <!--end::Input-->
+                        </div>
+
+
 
                         <!--begin::Image input placeholder-->
 

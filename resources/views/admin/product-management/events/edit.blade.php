@@ -99,23 +99,47 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2" name="title">Event Title</label>
+                            <label class="required fw-semibold fs-6 mb-2" name="title">Event Title In English</label>
                             <!--end::Label-->
 
                             <!--begin::Input-->
                             <input type="text" name="title" class="form-control form-control-solid mb-3 mb-lg-0"
-                                placeholder="Enter Title" value="{{ $data->title ?? '' }}" />
+                                placeholder="Enter Title In English" value="{{ $data->title ?? '' }}" />
+                            <!--end::Input-->
+                        </div>
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2" name="title_in_he">Event Title In
+                                Hebrew</label>
+                            <!--end::Label-->
+
+                            <!--begin::Input-->
+                            <input type="text" name="title_in_he"
+                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Enter Title In Hebrew"
+                                value="{{ $data->title_in_he ?? '' }}" />
                             <!--end::Input-->
                         </div>
                         <!--begin::Image input placeholder-->
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2" name="price">Description</label>
+                            <label class="required fw-semibold fs-6 mb-2" name="price">Description In English</label>
                             <!--end::Label-->
 
                             <textarea name="description" id="editor" class="editor form-control form-control-solid mb-3 mb-lg-0"
-                                placeholder="Enter Description"> {{ $data->description }}</textarea>
+                                placeholder="Enter Description In English"> {{ $data->description }}</textarea>
+                        </div>
+
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2" name="description_in_he">Description In
+                                Hebrew</label>
+                            <!--end::Label-->
+
+                            <textarea name="description_in_he" id="editor1" class="editor form-control form-control-solid mb-3 mb-lg-0"
+                                placeholder="Enter Description In Hebrew"> {{ $data->description_in_he }}</textarea>
                         </div>
 
 

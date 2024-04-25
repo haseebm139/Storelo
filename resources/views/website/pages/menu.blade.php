@@ -17,12 +17,22 @@
         }
     </style>
 @endsection
+@php
+
+    $lang = session()->get('locale');
+    if ($lang == 'he') {
+        $name = $data['menu']->name_in_he;
+    } else {
+        $name = \Str::upper($data['menu']->name);
+    }
+
+@endphp
 @section('content')
     <section
         style="background: url('{{ asset('web_assets/img/menu-background.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;height:240px;">
         <div class="row">
             <div class="col-sm-12">
-                <h4 class="menu-description">{{ $data['menu']->name }}</h4>
+                <h4 class="menu-description">{{ $name ?? '' }}</h4>
             </div>
         </div>
     </section>
@@ -40,7 +50,8 @@
                         All Categories
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#All" onclick="toggleTab('All')">All</a>
+                        <a class="dropdown-item" href="#All"
+                            onclick="toggleTab('All')">{{ $lang == 'he' ? 'את כל' : 'All' }}</a>
 
 
                         @if (isset($data['categories']))
@@ -58,14 +69,21 @@
                 <!-- First row of tabs -->
                 <li class="nav-item" data-category-slug='all'>
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#All" role="tab"
-                        aria-controls="home" aria-selected="true">All</a>
+                        aria-controls="home" aria-selected="true">{{ $lang == 'he' ? 'את כל' : 'All' }}</a>
                 </li>
                 <!-- Add more tabs here up to 17 -->
                 @if (isset($data['categories']))
                     @foreach ($data['categories_list'] as $item)
+                        @php
+                            if ($lang == 'he') {
+                                $c_name = $item->name_in_he;
+                            } else {
+                                $c_name = \Str::upper($item->name);
+                            }
+                        @endphp
                         <li class="nav-item" data-category-slug="{{ $item->slug }}">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Beers" role="tab"
-                                aria-controls="profile" aria-selected="false">{{ Str::upper($item->name) }}</a>
+                                aria-controls="profile" aria-selected="false">{{ $c_name }}</a>
                         </li>
                     @endforeach
                 @endif
@@ -96,7 +114,8 @@
     <div class="row summary-section">
         <div class="col-sm-12">
             <a href="javascript:void(0)" id="orderSummary" class="btn btn-primary summary-btn" data-toggle="modal">
-                <span><img src="{{ asset('web_assets/img/shopping.png') }}" alt=""></span> Order Summary</a>
+                <span><img src="{{ asset('web_assets/img/shopping.png') }}" alt=""></span>
+                {{ __('home.order_summary') }}</a>
         </div>
     </div>
     <div class="modal fade" id="orderSummaryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -109,16 +128,15 @@
                         <div class="row summary-section">
                             <div class="col-sm-12">
                                 <a href="#" class="btn btn-primary summary-btn ty close-summary-model"> <span><img
-                                            src="{{ asset('web_assets/img/shopping.png') }}" alt=""></span> Order
-                                    Summary</a>
+                                            src="{{ asset('web_assets/img/shopping.png') }}"
+                                            alt=""></span>{{ __('home.order_summary') }}</a>
                             </div>
                         </div>
 
                         <!-- order-summary-button-end -->
                         <div class="row">
                             <div class="col-sm-12">
-                                <h3 class="order-descripation">Use This Handy Memory Device To Quickly Recall What You Want
-                                    To Order And Show It To Your Waiter.</h3>
+                                <h3 class="order-descripation">{{ __('home.invoice_header') }}</h3>
                             </div>
                         </div>
                         <div class="container">
@@ -131,7 +149,7 @@
                                                 <table class="table" id="cart_table">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h1 style="font-family:cursive;">INVOICE</h1>
+                                                            <h1 style="font-family:cursive;">{{ __('home.invoice') }}</h1>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <img src="{{ asset('web_assets/img/print.png') }}"
@@ -149,9 +167,10 @@
                                                     <thead>
                                                         <tr class="border-b">
                                                             <th class="text-center table-font ">S.No</strong></th>
-                                                            <th class="text-left table-font">Item(S)</th>
-                                                            <th class="text-center table-font">Quantity</th>
-                                                            <th class="table-font text-center">Price</th>
+                                                            <th class="text-left table-font">{{ __('home.items') }}</th>
+                                                            <th class="text-center table-font">{{ __('home.quantity') }}
+                                                            </th>
+                                                            <th class="table-font text-center">{{ __('home.price') }}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -175,7 +194,8 @@
                                                         </tr>
 
                                                         <tr>
-                                                            <td class="text-left"> <Strong>Total</Strong></td>
+                                                            <td class="text-left"> <Strong>{{ __('home.total') }}</Strong>
+                                                            </td>
                                                             <td class="text-center"></td>
                                                             <td class="text-center"><Strong>12<Strong></td>
                                                             <td><Strong>423</Strong></td>
@@ -197,12 +217,12 @@
                                 <div class="col-sm-4 foram">
 
                                     <div>
-                                        <label for="name">Your Name</label>
+                                        <label for="name">{{ __('home.your_name') }}</label>
                                         <input class="f-input" type="text" id="name" name="name" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 fo">
-                                    <label for="order">Table Number</label>
+                                    <label for="order">{{ __('home.table_number') }}</label>
                                     <select id="order" name="table_no" required class="f-select">
                                         <option value="">Select Table</option>
                                         <option value="1">01</option>
@@ -224,7 +244,8 @@
                             <div class="col-sm-3"></div>
                             <div class="row justify-content-center mt-4">
                                 <div class="col-sm-12 mx-auto text-center">
-                                    <button type="submit" class="btn btn-primary about-btnn"> Place Order</button>
+                                    <button type="submit"
+                                        class="btn btn-primary about-btnn">{{ __('home.place_order') }}</button>
 
                                 </div>
                             </div>
@@ -236,7 +257,7 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <h3 class="order-bottom">To place your order, please fill in your details below.</h3>
+                            <h3 class="order-bottom">{{ __('home.footer_text') }}</h3>
 
                         </div>
                     </div>
@@ -262,7 +283,7 @@
                     url: url,
                     type: 'GET',
                     success: function(response) {
-                        console.log(response);
+
                         $('#All').append(response);
 
                     },
@@ -336,6 +357,7 @@
                     $('#loadMoreBtn').addClass('d-none');
 
                 }
+                console.log(get_category);
                 loadMoreData1(1)
             });
             $('.categories-list').on('click', function(e) {

@@ -32,8 +32,8 @@
                 <!--begin::Content-->
                 <div class="card-body py-4 mx-20">
                     <!--begin::Form-->
-                    <form action="{{ route('product-management.special-products.update', $data->id ?? '') }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('product-management.special-products.update', $data->id ?? '') }}"
+                        method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -96,12 +96,25 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2" name="title">Event Title</label>
+                            <label class="required fw-semibold fs-6 mb-2" name="title">Event Title In English</label>
                             <!--end::Label-->
 
                             <!--begin::Input-->
                             <input type="text" name="title" class="form-control form-control-solid mb-3 mb-lg-0"
-                                placeholder="Enter Title" value="{{ $data->title ?? '' }}" />
+                                placeholder="Enter Title In English" value="{{ $data->title ?? '' }}" />
+                            <!--end::Input-->
+                        </div>
+
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2" name="title">Event Title In Hebrew</label>
+                            <!--end::Label-->
+
+                            <!--begin::Input-->
+                            <input type="text" name="title_in-he"
+                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Enter Title In Hebrew"
+                                value="{{ $data->title ?? '' }}" />
                             <!--end::Input-->
                         </div>
                         <!--begin::Image input placeholder-->
@@ -113,6 +126,17 @@
 
                             <textarea name="description" id="editor" class=" form-control form-control-solid mb-3 mb-lg-0"
                                 placeholder="Enter Description"> {{ $data->description }}</textarea>
+                        </div>
+
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2" name="description_in_he">Description In
+                                Hebrew</label>
+                            <!--end::Label-->
+
+                            <textarea name="description_in_he" id="editor" class=" form-control form-control-solid mb-3 mb-lg-0"
+                                placeholder="Enter Description In Hebrew"> {{ $data->description_in_he }}</textarea>
                         </div>
 
 

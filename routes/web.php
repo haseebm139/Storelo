@@ -15,7 +15,8 @@ use App\Http\Controllers\Apps\Admin\ProductController;
 use App\Http\Controllers\Apps\Admin\EventController;
 use App\Http\Controllers\Apps\Admin\SpecialProductController;
 use App\Http\Controllers\Apps\Admin\OrderController;
-
+use App\Http\Controllers\Apps\Admin\SliderController;
+use App\Http\Controllers\Apps\Admin\WebsiteSettingController;
 
 use App\Http\Controllers\Webs\HomeController;
 
@@ -34,6 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/upload-image', [DashboardController::class, 'uploadImage'])->name('upload.image');
+
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -57,11 +59,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::resource('/special-products', SpecialProductController::class);
         Route::get('special-products-change-status', [SpecialProductController::class,'change_status'])->name('special-products.change.status');
+
+        Route::resource('/slider', SliderController::class);
+        Route::get('slider-change-status', [SliderController::class,'change_status'])->name('slider.change.status');
+
+
     });
 
     Route::name('order-management.')->group(function () {
         Route::resource('/order', OrderController::class);
         Route::get('get-order-details', [OrderController::class,'getOrderDetails'])->name('get.order.details');
+    });
+
+    Route::name('website-management.')->group(function () {
+        Route::resource('/website', WebsiteSettingController::class);
     });
 
     Route::resource('image/upload', ImageUpload::class);
@@ -84,8 +95,8 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('order_summary', 'createSummary')->name('website.order_summary');
     Route::POST('mailing-list', 'saveIntoMailingList')->name('website.mailing-list');
     Route::POST('place-order', 'placeOrder')->name('website.place-order');
-
 });
+Route::get('lang/change', [HomeController::class, 'changeLang'])->name('changeLang');
 Route::get('/auth/redirect/{provider}', [SocialiteController::class, 'redirect']);
 
 require __DIR__ . '/auth.php';

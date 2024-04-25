@@ -40,6 +40,7 @@ class ProductController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'name_in_he' => 'required',
             'image' =>'required',
             'category_id' =>'required',
             'menu_id' =>'required',
@@ -61,6 +62,7 @@ class ProductController extends Controller
             $slug = Str::slug($request->name);
             $uniqueSlug = $this->makeUniqueSlug($slug);
             $input['name'] = $request->name;
+            $input['name_in_he'] = $request->name_in_he;
             $input['slug'] =$uniqueSlug;
             $input['category_id'] = $request->category_id;
             $input['menu_id'] = $request->menu_id;
@@ -117,6 +119,10 @@ class ProductController extends Controller
             }
             if ($request->category_id != $data->category_id) {
                 $input['category_id']  = $request->category_id;
+
+            }
+            if ($request->name_in_he != $data->name_in_he) {
+                $input['name_in_he']  = $request->name_in_he;
 
             }
             if ($request->menu_id != $data->menu_id) {

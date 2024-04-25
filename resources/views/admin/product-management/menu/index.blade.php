@@ -103,11 +103,25 @@
                                         <div class="fv-row mb-7">
                                             <!--begin::Label-->
                                             <label class="required fw-semibold fs-6 mb-2" name="name">Menu
-                                                Name</label>
+                                                Name In English</label>
                                             <!--end::Label-->
 
                                             <!--begin::Input-->
                                             <input type="text" name="name"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="Enter Menu Name" />
+                                            <!--end::Input-->
+                                        </div>
+
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="required fw-semibold fs-6 mb-2" name="name_in_he">Menu
+                                                Name In Hebrew</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input type="text" name="name_in_he"
                                                 class="form-control form-control-solid mb-3 mb-lg-0"
                                                 placeholder="Enter Menu Name" />
                                             <!--end::Input-->
@@ -209,7 +223,8 @@
 
 
                             <th class="min-w-125px">Image</th>
-                            <th class="min-w-125px">Menu Name</th>
+                            <th class="min-w-125px">Menu Name In English</th>
+                            <th class="min-w-125px">Menu Name In Hebrew</th>
                             <th class="min-w-125px">Status</th>
                             <th class="text-end min-w-70px">Action</th>
                         </tr>
@@ -221,6 +236,7 @@
                                 <tr>
                                     <td><img src="{{ $item->image }}" alt=""></td>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ $item->name_in_he }}</td>
                                     <td>
                                         <div class="form-group">
                                             <div

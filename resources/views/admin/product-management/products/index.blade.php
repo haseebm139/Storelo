@@ -161,13 +161,26 @@
                                         <div class="fv-row mb-7">
                                             <!--begin::Label-->
                                             <label class="required fw-semibold fs-6 mb-2" name="name">Product
-                                                Name</label>
+                                                Name In English</label>
                                             <!--end::Label-->
 
                                             <!--begin::Input-->
                                             <input type="text" name="name"
                                                 class="form-control form-control-solid mb-3 mb-lg-0"
-                                                placeholder="Enter Product Name" />
+                                                placeholder="Enter Product Name In English" />
+                                            <!--end::Input-->
+                                        </div>
+
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="required fw-semibold fs-6 mb-2" name="name_in_he">Product
+                                                Name In Hebrew</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input type="text" name="name_in_he"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="Enter Product Name In Hebrew" />
                                             <!--end::Input-->
                                         </div>
 
@@ -179,9 +192,10 @@
                                             <!--end::Label-->
 
                                             <!--begin::Input-->
-                                            <select class="form-select form-select-solid form-select-md" name="menu_id" data-control="select2">
+                                            <select class="form-select form-select-solid form-select-md"
+                                                name="menu_id" data-control="select2">
                                                 @foreach ($menus as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                             <!--end::Input-->
@@ -195,9 +209,10 @@
                                             <!--end::Label-->
 
                                             <!--begin::Input-->
-                                            <select class="form-select form-select-solid form-select-md" name="category_id" data-control="select2">
+                                            <select class="form-select form-select-solid form-select-md"
+                                                name="category_id" data-control="select2">
                                                 @foreach ($categories as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                             <!--end::Input-->
@@ -254,7 +269,8 @@
 
 
                             <th class="min-w-125px">Image</th>
-                            <th class="min-w-125px">Product Name</th>
+                            <th class="min-w-125px">Product Name In English</th>
+                            <th class="min-w-125px">Product Name In Hebrew</th>
                             <th class="min-w-125px">Menu Name</th>
                             <th class="min-w-125px">Category Name</th>
                             <th class="min-w-125px">Price (NIS)</th>
@@ -270,6 +286,8 @@
                                     <td><img style="height:80px; width:80px;" src="{{ $item->image }}" alt="">
                                     </td>
                                     <td>{{ $item->name ?? '' }}</td>
+                                    <td>{{ $item->name_in_he ?? '' }}</td>
+
                                     <td>{{ $item->menu->name ?? '' }}</td>
                                     <td>{{ $item->category->name ?? '' }}</td>
                                     <td>{{ $item->price }}</td>

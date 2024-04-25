@@ -1,8 +1,19 @@
+@php
+    $lang = session()->get('locale');
+
+@endphp
 @if (isset($data['categories']))
     @foreach ($data['categories'] as $key => $item)
+        @php
+            if ($lang == 'he') {
+                $cc_name = $item->name_in_he;
+            } else {
+                $cc_name = \Str::upper($item->name);
+            }
+        @endphp
         <div class="row">
             <div class="col-sm-12">
-                <h4 class="tabs-des">{{ Str::upper($item->name) }}</h4>
+                <h4 class="tabs-des">{{ $cc_name }}</h4>
             </div>
         </div>
 
@@ -38,7 +49,8 @@
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                         <i class="fas fa-minus"></i>
                                                     </button>
-                                                    <input  min="0" name="quantity" value="{{ getValue($value->id) }}" class="qty-input"
+                                                    <input min="0" name="quantity"
+                                                        value="{{ getValue($value->id) }}" class="qty-input"
                                                         type="number" class="form-control form-control-sm"
                                                         style="width: 60px;" />
                                                     <button data-mdb-button-init data-mdb-ripple-init
@@ -80,7 +92,8 @@
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                         <i class="fas fa-minus"></i>
                                                     </button>
-                                                    <input  min="0" name="quantity" value="{{ getValue($value->id) }}" class="qty-input"
+                                                    <input min="0" name="quantity"
+                                                        value="{{ getValue($value->id) }}" class="qty-input"
                                                         type="number" class="form-control form-control-sm"
                                                         style="width: 60px;" />
                                                     <button data-mdb-button-init data-mdb-ripple-init

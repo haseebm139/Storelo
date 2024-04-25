@@ -6,6 +6,10 @@ use App\Core\KTBootstrap;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use App\Models\WebsiteSetting;
+use App\Models\Menu;
+
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -29,5 +33,8 @@ class AppServiceProvider extends ServiceProvider
         Builder::defaultStringLength(191);
         Paginator::useBootstrap();
         KTBootstrap::init();
+        $website = WebsiteSetting::first();
+        $menu = Menu::get();
+        view()->share(compact('website','menu'));
     }
 }

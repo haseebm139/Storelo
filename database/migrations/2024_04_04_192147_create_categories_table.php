@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('menu_id')->nullable();
             $table->string('name')->nullable();
+            $table->string('name_in_he')->nullable();
             $table->string('slug')->nullable()->unique();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

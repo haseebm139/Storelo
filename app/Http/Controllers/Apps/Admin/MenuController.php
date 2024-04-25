@@ -34,6 +34,7 @@ class MenuController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'name_in_he' => 'required',
             'image' =>'required',
         ]);
 
@@ -50,6 +51,7 @@ class MenuController extends Controller
             $slug = Str::slug($request->name);
             $uniqueSlug = $this->makeUniqueSlug($slug);
             $input['name'] = $request->name;
+            $input['name_in_he'] = $request->name_in_he;
             $input['slug'] =$uniqueSlug;
             $input['image'] = $file_path;
 
@@ -95,6 +97,9 @@ class MenuController extends Controller
             }
             if ($request->name) {
                 $input['name']  = $request->name;
+            }
+            if ($request->name_in_he) {
+                $input['name_in_he']  = $request->name_in_he;
             }
             if($request->hasFile('image'))
             {

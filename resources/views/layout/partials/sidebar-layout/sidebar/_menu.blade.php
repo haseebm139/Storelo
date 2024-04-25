@@ -20,16 +20,16 @@
             </div>
             <!--end:Menu item-->
             <!--begin:Menu item-->
-            <div class="menu-item pt-5">
+            {{-- <div class="menu-item pt-5">
                 <!--begin:Menu content-->
                 <div class="menu-content">
                     <span class="menu-heading fw-bold text-uppercase fs-7">Apps</span>
                 </div>
                 <!--end:Menu content-->
-            </div>
+            </div> --}}
             <!--end:Menu item-->
             <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click"
+            {{-- <div data-kt-menu-trigger="click"
                 class="menu-item menu-accordion {{ request()->routeIs('user-management.*') ? 'here show' : '' }}">
                 <!--begin:Menu link-->
                 <span class="menu-link">
@@ -81,7 +81,7 @@
                     <!--end:Menu item-->
                 </div>
                 <!--end:Menu sub-->
-            </div>
+            </div> --}}
             <!--begin:Menu item-->
             <div class="menu-item pt-5">
                 <!--begin:Menu content-->
@@ -91,7 +91,7 @@
                 <!--end:Menu content-->
             </div>
             <!--end:Menu item-->
-            <!--begin:Business Registration -->
+            <!--begin:Product Registration -->
 
             <div data-kt-menu-trigger="click"
                 class="menu-item menu-accordion {{ request()->routeIs('product-management.*') ? 'here show' : '' }}">
@@ -173,11 +173,95 @@
                     </div>
                     <!--end:Menu item-->
 
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link {{ request()->routeIs('product-management.slider.*') ? 'active' : '' }}"
+                            href="{{ route('product-management.slider.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Slider</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
 
                 </div>
                 <!--end:Menu sub-->
             </div>
-            <!--end:Business Registration-->
+            <!--end:Product Registration-->
+
+            <!--begin:Order Registration -->
+
+            <div data-kt-menu-trigger="click"
+                class="menu-item menu-accordion {{ request()->routeIs('order-management.*') ? 'here show' : '' }}">
+                <!--begin:Menu link-->
+                <span class="menu-link">
+                    <span class="menu-icon">{!! getIcon('abstract-28', 'fs-2') !!}</span>
+                    <span class="menu-title">Order Management</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <!--end:Menu link-->
+                <!--begin:Menu sub-->
+                <div class="menu-sub menu-sub-accordion">
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link {{ request()->routeIs('order-management.order.*') ? 'active' : '' }}"
+                            href="{{ route('order-management.order.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Orders</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+
+
+
+                </div>
+                <!--end:Menu sub-->
+            </div>
+            <!--end:Order Registration-->
+
+            <!--begin:Order Registration -->
+
+            <div data-kt-menu-trigger="click"
+                class="menu-item menu-accordion {{ request()->routeIs('website-management.*') ? 'here show' : '' }}">
+                <!--begin:Menu link-->
+                <span class="menu-link">
+                    <span class="menu-icon">{!! getIcon('abstract-28', 'fs-2') !!}</span>
+                    <span class="menu-title">Website Management</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <!--end:Menu link-->
+                <!--begin:Menu sub-->
+                <div class="menu-sub menu-sub-accordion">
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link {{ request()->routeIs('website-management.order.*') ? 'active' : '' }}"
+                            href="{{ route('website-management.website.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Website</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+
+
+
+                </div>
+                <!--end:Menu sub-->
+            </div>
+            <!--end:Order Registration-->
 
 
 

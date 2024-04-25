@@ -69,7 +69,7 @@
                             <!--begin::Modal header-->
                             <div class="modal-header" id="kt_modal_add_user_header">
                                 <!--begin::Modal title-->
-                                <h2 class="fw-bold">Add Menu</h2>
+                                <h2 class="fw-bold">Add Events</h2>
                                 <!--end::Modal title-->
 
                                 <!--begin::Close-->
@@ -160,13 +160,28 @@
                                         <!--begin::Input group-->
                                         <div class="fv-row mb-7">
                                             <!--begin::Label-->
-                                            <label class="required fw-semibold fs-6 mb-2" name="name">Title</label>
+                                            <label class="required fw-semibold fs-6 mb-2" name="name">Title In
+                                                English</label>
                                             <!--end::Label-->
 
                                             <!--begin::Input-->
                                             <input type="text" name="title"
                                                 class="form-control form-control-solid mb-3 mb-lg-0"
-                                                placeholder="Enter Title" />
+                                                placeholder="Enter Title In English" />
+                                            <!--end::Input-->
+                                        </div>
+
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="required fw-semibold fs-6 mb-2" name="title_in_he">Title In
+                                                Hebrew</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input type="text" name="title_in_he"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="Enter Title In Hebrew" />
                                             <!--end::Input-->
                                         </div>
 
@@ -177,11 +192,23 @@
                                         <!--begin::Input group-->
                                         <div class="fv-row mb-7">
                                             <!--begin::Label-->
-                                            <label class="required fw-semibold fs-6 mb-2" name="price">Description</label>
+                                            <label class="required fw-semibold fs-6 mb-2" name="price">Description
+                                                In English</label>
                                             <!--end::Label-->
 
                                             <textarea name="description" id="editor" class="editor form-control form-control-solid mb-3 mb-lg-0"
-                                            placeholder="Enter Description"></textarea>
+                                                placeholder="Enter Description In English"></textarea>
+                                        </div>
+
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="required fw-semibold fs-6 mb-2"
+                                                name="description_in_he">Description In Hebrew</label>
+                                            <!--end::Label-->
+
+                                            <textarea name="description_in_he" id="editor1" class="editor form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="Enter Description In Hebrew"></textarea>
                                         </div>
 
 
@@ -221,8 +248,10 @@
 
 
                             <th class="min-w-125px">Image</th>
-                            <th class="min-w-125px">Title</th>
-                            <th class="min-w-125px">Description</th>
+                            <th class="min-w-125px">Title In English</th>
+                            <th class="min-w-125px">Title In Hebrew</th>
+                            <th class="min-w-125px">Description In English</th>
+                            <th class="min-w-125px">Description In Hebrew</th>
                             <th class="min-w-125px">Status</th>
                             <th class="text-end min-w-70px">Action</th>
                         </tr>
@@ -235,7 +264,9 @@
                                     <td><img style="height:80px; width:80px;" src="{{ $item->image }}" alt="">
                                     </td>
                                     <td>{{ $item->title ?? '' }}</td>
+                                    <td>{{ $item->title_in_he ?? '' }}</td>
                                     <td>{!! $item->description ?? '' !!}</td>
+                                    <td>{!! $item->description_in_he ?? '' !!}</td>
 
                                     <td>
                                         <div class="form-group">

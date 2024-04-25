@@ -10,4 +10,6 @@ class DashboardController extends Controller
         $data = MailingList::get();
         return view('pages.dashboards.index',compact('data'));
     }
+
+
 }
