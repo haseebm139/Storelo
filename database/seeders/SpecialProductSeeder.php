@@ -27,7 +27,7 @@ class SpecialProductSeeder extends Seeder
                 'title_in_he'=>"שוקולדי נמסיס",
                 'description'=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                 'description_in_he'=>"לורם איפסום הוא סתם טקסט דמו של תעשיית הדפוס וההפקה",
-                'image'=>'documents/fake/images/sp1.png'
+                'image'=>'documents/fake/images/sp2.png'
             ],
 
             [
@@ -35,7 +35,7 @@ class SpecialProductSeeder extends Seeder
                 'title_in_he'=>"קרפאצ'ו של תפוח סלע מתוק באש",
                 'description'=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                 'description_in_he'=>"לורם איפסום הוא סתם טקסט דמו של תעשיית הדפוס וההפקה",
-                'image'=>'documents/fake/images/sp1.png'
+                'image'=>'documents/fake/images/sp2.png'
             ],
 
         ];
