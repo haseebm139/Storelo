@@ -40,7 +40,14 @@ return [
     'select_table'=>'Select Table',
     'invoice_header'=>'Use This Handy Memory Device To Quickly Recall What You Want To Order And Show It To Your Waiter.',
     'footer_text'=>'To place your order, please fill in your details below.',
-
-
+    "welcome_to"=>"Welcome To",
+    "join_our_family"=>"JOIN THE FAMILY",
+    "award_description"=>"We've been shortlisted in the Japanese category!",
+    "award_description1"=>"Wanna show your love and help us hit the top spot?",
+    "select_table"=>"Select Table",
+    "total"=>"Total",
+    "drink"=>"Drink",
+    "eat_storelo"=>"Eat Storelo",
+    "main_menu"=>"Main Menu",
 
 ];

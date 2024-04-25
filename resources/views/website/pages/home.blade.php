@@ -34,7 +34,7 @@
                         @endphp
                         <div class="carousel-item @if ($key == 0) active @endif">
                             <img class="d-block w-100 carousel-picture" src="{{ asset($img) }}" alt="Second slide">
-                            <div class="carousel-caption">
+                            <div class="carousel-caption @if ($lang == 'he') rtl @endif">
                                 <p class="crousel-para">{{ $s_title }}</p>
                                 <h2 class="crousel-heading">{{ $s_description }}</h2>
                                 <br>
@@ -328,11 +328,13 @@
                             <div class="col-sm-4 about-bg">
                                 <div class="about-body">
 
-                                    <h5 class="abour-des">{{ $event_title }}</h5>
-                                    <p class="about-text-title">{!! $event_description !!}</p>
+                                    <h5 class="abour-des @if ($lang == 'he') rtl @endif">
+                                        {{ $event_title }}</h5>
+                                    <p class="about-text-title @if ($lang == 'he') rtl @endif">
+                                        {!! $event_description !!}</p>
 
                                     <a href="javascript:void(0)"
-                                        class="btn btn-primary about-btn">{{ __('home.explore_more') }}</a>
+                                        class="btn btn-primary about-btn @if ($lang == 'he') about-btn-rtl @endif">{{ __('home.explore_more') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -342,11 +344,13 @@
                             <div class="col-sm-4 about-bg">
                                 <div class="about-body">
 
-                                    <h5 class="abour-des">{{ $event_title }}</h5>
-                                    <p class="about-text-title">{!! $event_description !!}</p>
+                                    <h5 class="abour-des @if ($lang == 'he') rtl @endif">
+                                        {{ $event_title }}</h5>
+                                    <p class="about-text-title @if ($lang == 'he') rtl @endif">
+                                        {!! $event_description !!}</p>
 
                                     <a href="javascript:void(0)"
-                                        class="btn btn-primary about-btn">{{ __('home.explore_more') }}</a>
+                                        class="btn btn-primary about-btn @if ($lang == 'he') about-btn-rtl @endif">{{ __('home.explore_more') }}</a>
                                 </div>
                             </div>
                             <div class="col-sm-8">
@@ -373,14 +377,18 @@
                 <div class="col-sm-4">
                     <div class="welcome-body">
 
-                        <h5 class="welcome-des">Welcome TO</h5>
-                        <h4 class="welcome-descripation">JOIN THE FAMILY</h4>
-                        <p class="welcome-text-title"> We've been shortlisted in the Japanese category!
+                        <h5 class="welcome-des @if ($lang == 'he') rtl @endif">{{ __('home.welcome_to') }}
+                        </h5>
+                        <h4 class="welcome-descripation @if ($lang == 'he') rtl @endif">
+                            {{ __('home.join_our_family') }}</h4>
+                        <p class="welcome-text-title @if ($lang == 'he') rtl @endif">
+                            {{ __('home.award_description') }}
                             <br>
-                            Wanna show your love and help us hit the top spot?
+                            {{ __('home.award_description1') }}
                         </p>
 
-                        <a href="#" class="btn btn-primary welcome-btn">{{ __('home.vote_for_us') }}</a>
+                        <a href="#"
+                            class="btn btn-primary welcome-btn @if ($lang == 'he') about-btn-rtl @endif">{{ __('home.vote_for_us') }}</a>
                     </div>
                 </div>
                 <div class="col-sm-2"></div>

@@ -87,6 +87,7 @@
                         </li>
                     @endforeach
                 @endif
+
             </ul>
 
             <div class="tab-pane fade show active" id="All" role="tabpanel" aria-labelledby="home-tab">
@@ -118,156 +119,330 @@
                 {{ __('home.order_summary') }}</a>
         </div>
     </div>
-    <div class="modal fade" id="orderSummaryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        style="background: url({{ asset('web_assets/img/bg.png') }});" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+    @if ($lang == 'en')
+        <div class="modal fade" id="orderSummaryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            style="background: url({{ asset('web_assets/img/bg.png') }});" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
 
-                <div class="modal-body">
                     <div class="modal-body">
-                        <div class="row summary-section">
-                            <div class="col-sm-12">
-                                <a href="#" class="btn btn-primary summary-btn ty close-summary-model"> <span><img
-                                            src="{{ asset('web_assets/img/shopping.png') }}"
-                                            alt=""></span>{{ __('home.order_summary') }}</a>
+                        <div class="modal-body">
+                            <div class="row summary-section">
+                                <div class="col-sm-12">
+                                    <a href="#" class="btn btn-primary summary-btn ty close-summary-model"> <span><img
+                                                src="{{ asset('web_assets/img/shopping.png') }}"
+                                                alt=""></span>{{ __('home.order_summary') }}</a>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- order-summary-button-end -->
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h3 class="order-descripation">{{ __('home.invoice_header') }}</h3>
+                            <!-- order-summary-button-end -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h3 class="order-descripation">{{ __('home.invoice_header') }}</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div class="container">
-                            <div class="row table-background ">
-                                <div class="col-md-12">
-                                    <div class="panel panel-default">
+                            <div class="container">
+                                <div class="row table-background ">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
 
-                                        <div class="panel-body">
-                                            <div class="">
-                                                <table class="table" id="cart_table">
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <h1 style="font-family:cursive;">{{ __('home.invoice') }}</h1>
+                                            <div class="panel-body">
+                                                <div class="">
+                                                    <table class="table" id="cart_table">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <h1 style="font-family:cursive;">{{ __('home.invoice') }}
+                                                                </h1>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <img src="{{ asset('web_assets/img/print.png') }}"
+                                                                    id="printButton" class="float-right"alt="">
+                                                            </div>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <img src="{{ asset('web_assets/img/print.png') }}"
-                                                                id="printButton" class="float-right"alt="">
-                                                        </div>
-                                                    </div>
 
 
-                                                    <br>
+                                                        <br>
 
-                                                    {{-- <h6 style="font-family:cursive;">Name: MR.JOHN <span
+                                                        {{-- <h6 style="font-family:cursive;">Name: MR.JOHN <span
                                                             style="margin-left:33px;"> Phone:+123 456 789</span></h6> --}}
 
 
-                                                    <thead>
-                                                        <tr class="border-b">
-                                                            <th class="text-center table-font ">S.No</strong></th>
-                                                            <th class="text-left table-font">{{ __('home.items') }}</th>
-                                                            <th class="text-center table-font">{{ __('home.quantity') }}
-                                                            </th>
-                                                            <th class="table-font text-center">{{ __('home.price') }}</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="text-center">1</td>
-                                                            <td class="text-left">Corona bottle</td>
-                                                            <td class="text-center">1</td>
-                                                            <td class="text-center">03</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">2</td>
-                                                            <td class="text-left">A large Heineken</td>
-                                                            <td class="text-center">3</td>
-                                                            <td class="text-center">04</td>
-                                                        </tr>
-                                                        <tr class="border-b">
-                                                            <td class="text-center">3</td>
-                                                            <td class="text-left">Big Goldstar</td>
-                                                            <td class="text-center">1</td>
-                                                            <td class="text-center">05</td>
-                                                        </tr>
+                                                        <thead>
+                                                            <tr class="border-b">
+                                                                <th class="text-center table-font ">S.No</strong></th>
+                                                                <th class="text-left table-font">{{ __('home.items') }}
+                                                                </th>
+                                                                <th class="text-center table-font">
+                                                                    {{ __('home.quantity') }}
+                                                                </th>
+                                                                <th class="table-font text-center">{{ __('home.price') }}
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="text-center">1</td>
+                                                                <td class="text-left">Corona bottle</td>
+                                                                <td class="text-center">1</td>
+                                                                <td class="text-center">03</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-center">2</td>
+                                                                <td class="text-left">A large Heineken</td>
+                                                                <td class="text-center">3</td>
+                                                                <td class="text-center">04</td>
+                                                            </tr>
+                                                            <tr class="border-b">
+                                                                <td class="text-center">3</td>
+                                                                <td class="text-left">Big Goldstar</td>
+                                                                <td class="text-center">1</td>
+                                                                <td class="text-center">05</td>
+                                                            </tr>
 
-                                                        <tr>
-                                                            <td class="text-left"> <Strong>{{ __('home.total') }}</Strong>
-                                                            </td>
-                                                            <td class="text-center"></td>
-                                                            <td class="text-center"><Strong>12<Strong></td>
-                                                            <td><Strong>423</Strong></td>
-                                                        </tr>
+                                                            <tr>
+                                                                <td class="text-left">
+                                                                    <Strong>{{ __('home.total') }}</Strong>
+                                                                </td>
+                                                                <td class="text-center"></td>
+                                                                <td class="text-center"><Strong>12<Strong></td>
+                                                                <td><Strong>423</Strong></td>
+                                                            </tr>
 
-                                                    </tbody>
-                                                </table>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <br>
-                        <form action="{{ route('website.place-order') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-sm-2"></div>
-                                <div class="col-sm-4 foram">
+                            <br>
+                            <form action="{{ route('website.place-order') }}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-4 foram">
 
-                                    <div>
-                                        <label for="name">{{ __('home.your_name') }}</label>
-                                        <input class="f-input" type="text" id="name" name="name" required>
+                                        <div>
+                                            <label for="name">{{ __('home.your_name') }}</label>
+                                            <input class="f-input" type="text" id="name" name="name"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 fo">
+                                        <label for="order">{{ __('home.table_number') }}</label>
+                                        <select id="order" name="table_no" required class="f-select">
+                                            <option value="">Select Table</option>
+                                            <option value="1">01</option>
+                                            <option value="2">02</option>
+                                            <option value="3">03</option>
+                                            <option value="4">04</option>
+                                            <option value="5">05</option>
+                                            <option value="6">06</option>
+                                            <option value="7">07</option>
+                                            <option value="8">08</option>
+                                            <option value="9">09</option>
+                                            <option value="10">10</option>
+                                            <!-- Add more options as needed -->
+                                        </select>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-sm-3"></div>
+                                <div class="row justify-content-center mt-4">
+                                    <div class="col-sm-12 mx-auto text-center">
+                                        <button type="submit"
+                                            class="btn btn-primary about-btnn">{{ __('home.place_order') }}</button>
+
                                     </div>
                                 </div>
-                                <div class="col-sm-3 fo">
-                                    <label for="order">{{ __('home.table_number') }}</label>
-                                    <select id="order" name="table_no" required class="f-select">
-                                        <option value="">Select Table</option>
-                                        <option value="1">01</option>
-                                        <option value="2">02</option>
-                                        <option value="3">03</option>
-                                        <option value="4">04</option>
-                                        <option value="5">05</option>
-                                        <option value="6">06</option>
-                                        <option value="7">07</option>
-                                        <option value="8">08</option>
-                                        <option value="9">09</option>
-                                        <option value="10">10</option>
-                                        <!-- Add more options as needed -->
-                                    </select>
-                                </div>
-
-
-                            </div>
-                            <div class="col-sm-3"></div>
-                            <div class="row justify-content-center mt-4">
-                                <div class="col-sm-12 mx-auto text-center">
-                                    <button type="submit"
-                                        class="btn btn-primary about-btnn">{{ __('home.place_order') }}</button>
-
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-
-
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h3 class="order-bottom">{{ __('home.footer_text') }}</h3>
-
+                            </form>
                         </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3 class="order-bottom">{{ __('home.footer_text') }}</h3>
+
+                            </div>
+                        </div>
+
+
                     </div>
-
-
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
+    @endif
+    @if ($lang == 'he')
+        <div class="modal fade" id="orderSummaryModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" style="background: url({{ asset('web_assets/img/bg.png') }});"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="modal-body">
+                            <div class="row summary-section">
+                                <div class="col-sm-12">
+                                    <a href="#" class="btn btn-primary summary-btn ty close-summary-model">
+                                        <span><img src="{{ asset('web_assets/img/shopping.png') }}"
+                                                alt=""></span>{{ __('home.order_summary') }}</a>
+                                </div>
+                            </div>
+
+                            <!-- order-summary-button-end -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h3 class="order-descripation">{{ __('home.invoice_header') }}</h3>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row table-background ">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+
+                                            <div class="panel-body">
+                                                <div class="">
+                                                    <table class="table" id="cart_table">
+                                                        <div class="row">
+
+                                                            <div class="col-sm-6">
+                                                                <img src="{{ asset('web_assets/img/print.png') }}"
+                                                                    id="printButton" class="float-left"alt="">
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <h1 class="float-right" style="font-family:cursive;">
+                                                                    {{ __('home.invoice') }}
+                                                                </h1>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <br>
+
+                                                        {{-- <h6 style="font-family:cursive;">Name: MR.JOHN <span
+                                                            style="margin-left:33px;"> Phone:+123 456 789</span></h6> --}}
+
+
+                                                        <thead>
+                                                            <tr class="border-b">
+                                                                <th class="table-font text-center">{{ __('home.price') }}
+                                                                </th>
+                                                                <th class="text-center table-font">
+                                                                    {{ __('home.quantity') }}
+                                                                </th>
+                                                                <th class="text-left table-font">{{ __('home.items') }}
+                                                                </th>
+                                                                <th class="text-center table-font ">S.No</strong></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="text-center">1</td>
+                                                                <td class="text-left">Corona bottle</td>
+                                                                <td class="text-center">1</td>
+                                                                <td class="text-center">03</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-center">2</td>
+                                                                <td class="text-left">A large Heineken</td>
+                                                                <td class="text-center">3</td>
+                                                                <td class="text-center">04</td>
+                                                            </tr>
+                                                            <tr class="border-b">
+                                                                <td class="text-center">3</td>
+                                                                <td class="text-left">Big Goldstar</td>
+                                                                <td class="text-center">1</td>
+                                                                <td class="text-center">05</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><Strong>423</Strong></td>
+                                                                <td class="text-center"><Strong>12<Strong></td>
+                                                                <td class="text-center"></td>
+                                                                <td class="text-left">
+                                                                    <Strong>{{ __('home.total') }}</Strong>
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <form action="{{ route('website.place-order') }}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-3 fo">
+                                        <label class="float-right ml-3"
+                                            for="order">{{ __('home.table_number') }}</label>
+                                        <select id="order" name="table_no" required class="f-select float-right">
+                                            <option value="">{{ __('home.select_table') }}</option>
+                                            <option value="1">01</option>
+                                            <option value="2">02</option>
+                                            <option value="3">03</option>
+                                            <option value="4">04</option>
+                                            <option value="5">05</option>
+                                            <option value="6">06</option>
+                                            <option value="7">07</option>
+                                            <option value="8">08</option>
+                                            <option value="9">09</option>
+                                            <option value="10">10</option>
+                                            <!-- Add more options as needed -->
+                                        </select>
+
+
+                                    </div>
+                                    <div class="col-sm-4 foram">
+
+                                        <div>
+                                            <label class="float-right ml-3"
+                                                for="name">{{ __('home.your_name') }}</label>
+                                            <input class="float-right f-input rtl" type="text" id="name"
+                                                name="name" placeholder="{{ __('home.your_name') }}" required>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="col-sm-3"></div>
+                                <div class="row justify-content-center mt-4">
+                                    <div class="col-sm-12 mx-auto text-center">
+                                        <button type="submit"
+                                            class="btn btn-primary about-btnn">{{ __('home.place_order') }}</button>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3 class="order-bottom">{{ __('home.footer_text') }}</h3>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    @endif
 
 @endsection
 @section('script')

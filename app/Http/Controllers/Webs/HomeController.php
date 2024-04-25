@@ -99,6 +99,7 @@ class HomeController extends Controller
         return view('website.pages.home',compact('data'));
     }
     public function product(Request $request){
+        // return $cart = $this->cartData();
         $perPage = 1;
         $page = $request->page ?? 1;
         $offset = ($page - 1) * $perPage;
@@ -164,6 +165,7 @@ class HomeController extends Controller
         \Cart::add(array(
             'id' => $product->id,
             'name' => $product->name,
+            'name_in_he' => $product->name_in_he,
             'price' => $product->price,
             'quantity' => $qty,
             'attributes' => array(
@@ -194,6 +196,7 @@ class HomeController extends Controller
                 'price' => $product->price,
                 'quantity' => $qty,
                 'attributes' => [
+                    'name_in_he' => $product->name_in_he,
                     'image' => $product->image,
                     'slug' => $product->slug,
                 ],
