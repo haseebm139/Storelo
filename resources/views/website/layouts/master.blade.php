@@ -23,6 +23,7 @@
 
     {{-- Header --}}
     <header>
+        <input type="hidden" id="lang" value="{{ $lang }}">
         @php
             $image = $website->logo ?? 'assets/img/nav-back.png';
             $lang = session()->get('locale');
@@ -322,6 +323,24 @@
         //     });
         // }
 
+        function changeLanguage() {
+            var url = "{{ route('changeLang') }}";
+            $.ajax({
+                type: "GET",
+                url: url + "?lang=" + 'en',
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            var lang = $('#lang').val();
+            if (lang == '' || lang == null || lang == undefined) {
+
+                changeLanguage();
+            }
+        });
+
 
         function showKnife(card) {
             const knifeIcon = card.querySelector('.knife-icon');
@@ -384,12 +403,12 @@
             $('.tab-pane[id="' + tabName + '"]').addClass('show');
         }
 
-        var url = "{{ route('changeLang') }}";
+
 
         $(".language").click(function() {
             var selectedLanguage = $(this).data("language");
-            console.log(selectedLanguage);
-            window.location.href = url + "?lang=" + selectedLanguage;
+
+            // window.location.href =
         });
     </script>
     @yield('script')

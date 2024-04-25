@@ -97,8 +97,7 @@
                             </a>
                         </div>
                     @endforeach
-                @endif
-                @if ($lang == 'he')
+                @elseif($lang == 'he')
                     @foreach ($data['menu']->sortByDesc('id') as $item)
                         <div class="col-sm-2 col-text-underline">
                             <a href="{{ route('website.menus', ['slug' => $item->slug]) }}">
@@ -127,7 +126,35 @@
                             </a>
                         </div>
                     @endforeach
+                @else
+                    <div class="col-sm-2 col-text-underline">
+                        <a href="{{ route('website.menus', ['slug' => $item->slug]) }}">
+
+                            <div class="card" onmouseover="showKnife(this)" onmouseout="hideKnife(this)">
+                                @php
+                                    $img = $item->image ?? 'default.png';
+                                    if ($lang == 'he') {
+                                        $name = $item->name_in_he;
+                                    } else {
+                                        $name = \Str::upper($item->name);
+                                    }
+                                @endphp
+
+                                <img src="{{ asset($img) }}" class="img-fluid" alt="...">
+                                <div class="card-body">
+
+                                    <p id="test" class="card-text">{{ $name }}</p>
+                                    <div class="d-flex justify-content-center">
+                                        <img src="{{ asset('web_assets/img/knife.png') }}" alt="" id=""
+                                            class="knife-icon d-none">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
                 @endif
+
                 <div class="col-sm-1"></div>
             </div>
         </section>
@@ -153,7 +180,7 @@
                                             <a href="{{ route('website.menus', ['slug' => $item->slug]) }}">
                                                 <div class="card" onmouseover="showKnife(this)"
                                                     onmouseout="hideKnife(this)">
-                                                    <img src="{{ asset($img) }}" class="img-fluid" alt="...">
+                                                    <img src="{{ asset($img) }}" class="img-menu" alt="...">
                                                     <div class="card-body">
 
                                                         @php
@@ -183,7 +210,7 @@
                                             <a href="{{ route('website.menus', ['slug' => $item->slug]) }}">
                                                 <div class="card" onmouseover="showKnife(this)"
                                                     onmouseout="hideKnife(this)">
-                                                    <img src="{{ asset($img) }}" class="img-fluid" alt="...">
+                                                    <img src="{{ asset($img) }}" class="img-menu" alt="...">
                                                     <div class="card-body">
 
                                                         @php

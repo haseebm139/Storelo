@@ -35,8 +35,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/upload-image', [DashboardController::class, 'uploadImage'])->name('upload.image');
-
-
+    Route::get('/my-profile', [DashboardController::class,'myProfile'])->name('profile');
+    Route::get('/my-profile-update-email', [DashboardController::class,'myProfileUpdateEmail'])->name('myprofileUpdateEmail');
+    Route::get('/my-profile-update-name', [DashboardController::class,'myProfileUpdateName'])->name('myprofileUpdateName');
+Route::get('/my-profile-update-password', [DashboardController::class,'myProfileUpdatePassword'])->name('myprofileUpdatePassword');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::name('user-management.')->group(function () {

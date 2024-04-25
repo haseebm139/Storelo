@@ -32,7 +32,7 @@
         <div class="fv-row mb-3">
             <!--begin::Password-->
             <input type="password" placeholder="Password" name="password" autocomplete="off"
-                class="form-control bg-transparent" value="demo" />
+                class="form-control bg-transparent" value="12345678" />
             <!--end::Password-->
         </div>
         <!--end::Input group--->

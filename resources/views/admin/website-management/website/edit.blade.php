@@ -65,7 +65,7 @@
                                         class="path2"></span></i>
 
                                 <!--begin::Inputs-->
-                                <input type="file" name="image" accept=".png, .jpg, .jpeg" />
+                                <input type="file" name="logo" accept=".png, .jpg, .jpeg" />
                                 <input type="hidden" name="avatar_remove" />
                                 <!--end::Inputs-->
                             </label>

@@ -59,6 +59,13 @@ class WebsiteSettingController extends Controller
     {
         try{
             $data =  WebsiteSetting::find($id);
+            if($request->hasFile('logo'))
+            {
+                $img = time().$request->file('logo')->getClientOriginalName();
+                $file_path = "documents/logo/".$img;
+                $request->logo->move(public_path("documents/logo/"), $img);
+                $input['logo']  = $file_path;
+            }
             if ($request->working_hours) {
                 $input['working_hours']  = $request->working_hours;
             }

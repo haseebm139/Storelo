@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="kt_modal_update_password" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -22,11 +21,13 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_update_password_form" class="form" action="#">
+                <form id="kt_modal_update_password_form" class="form" action="{{ route('myprofileUpdatePassword') }}">
+
                     <!--begin::Input group=-->
                     <div class="fv-row mb-10">
                         <label class="required form-label fs-6 mb-2">Current Password</label>
-                        <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="current_password" autocomplete="off" />
+                        <input class="form-control form-control-lg form-control-solid" type="password" placeholder=""
+                            name="current_password" autocomplete="off" />
                     </div>
                     <!--end::Input group=-->
                     <!--begin::Input group-->
@@ -38,8 +39,10 @@
                             <!--end::Label-->
                             <!--begin::Input wrapper-->
                             <div class="position-relative mb-3">
-                                <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="new_password" autocomplete="off" />
-                                <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+                                <input class="form-control form-control-lg form-control-solid" type="password"
+                                    placeholder="" name="new_password" autocomplete="off" />
+                                <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
+                                    data-kt-password-meter-control="visibility">
                                     <i class="ki-duotone ki-eye-slash fs-1">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -72,12 +75,14 @@
                     <!--begin::Input group=-->
                     <div class="fv-row mb-10">
                         <label class="form-label fw-semibold fs-6 mb-2">Confirm New Password</label>
-                        <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm_password" autocomplete="off" />
+                        <input class="form-control form-control-lg form-control-solid" type="password" placeholder=""
+                            name="confirm_password" autocomplete="off" />
                     </div>
                     <!--end::Input group=-->
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
-                        <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
+                        <button type="reset" class="btn btn-light me-3"
+                            data-kt-users-modal-action="cancel">Discard</button>
                         <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...

@@ -716,6 +716,8 @@ select#order {
 
 }
 
+
+
 input#form1 {
     text-align: center;
     border: 0px;
@@ -730,6 +732,34 @@ input.qty-input {
 .btn:focus {
     outline: 0;
     box-shadow: unset !important;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #d2803f !important;
+    border-color: #d2803f !important;
+}
+
+@media only screen and (max-width: 568px) .table-background {
+    background: white;
+    padding-top: 18px;
+    padding-bottom: 0px;
+    padding-left: 12px;
+    padding-right: 70px;
+    width: 139%;
+    margin-left: -56px;
+    border: solid 1px;
+    border-radius: 6px;
+}
+
+
+@media only screen and (max-width: 568px) img.media-object.img-fluid {
+    width: 32px;
+    height: auto;
+    margin-right: 35px;
+    margin-left: 10px;
 }
 
 /* RTL */
