@@ -30,7 +30,12 @@
                                     <tr>
                                         <td class="col-sm-8 col-md-6">
                                             <div class="media">
-                                                <img class="media-object img-fluid" src="{{ asset($img) }}" />
+                                                @if (Str::startsWith($img, ['http', 'https']))
+                                                    <img class="media-object img-fluid" src="{{ asset($img) }}" />
+                                                @else
+                                                    <img class="media-object img-fluid" src="{{ asset($img) }}" />
+                                                @endif
+
                                                 <div class="media-body-cart">
                                                     <h4 class="media-heading">{{ $value->name }}</h4>
                                                     <p class="media-about">NIS {{ $value->price }}</p>
@@ -74,7 +79,11 @@
                                     <tr>
                                         <td class="col-sm-8 col-md-6">
                                             <div class="media">
-                                                <img class="media-object img-fluid" src="{{ asset($img) }}" />
+                                                @if (Str::startsWith($img, ['http', 'https']))
+                                                    <img class="media-object img-fluid" src="{{ asset($img) }}" />
+                                                @else
+                                                    <img class="media-object img-fluid" src="{{ asset($img) }}" />
+                                                @endif
                                                 <div class="media-body-cart">
                                                     <h4 class="media-heading">{{ $value->name }}</h4>
                                                     <p class="media-about">NIS {{ $value->price }}</p>
@@ -163,7 +172,11 @@
                                                     <h4 class="media-heading  ">{{ $value->name_in_he }}</h4>
                                                     <p class="media-about  ">NIS {{ $value->price }}</p>
                                                 </div>
-                                                <img class="media-object img-fluid" src="{{ asset($img) }}" />
+                                                @if (Str::startsWith($img, ['http', 'https']))
+                                                    <img class="media-object img-fluid" src="{{ asset($img) }}" />
+                                                @else
+                                                    <img class="media-object img-fluid" src="{{ asset($img) }}" />
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
@@ -209,7 +222,11 @@
                                                     <h4 class="media-heading ">{{ $value->name_in_he }}</h4>
                                                     <p class="media-about">NIS {{ $value->price }}</p>
                                                 </div>
-                                                <img class="media-object img-fluid" src="{{ asset($img) }}" />
+                                                @if (Str::startsWith($img, ['http', 'https']))
+                                                    <img class="media-object img-fluid" src="{{ asset($img) }}" />
+                                                @else
+                                                    <img class="media-object img-fluid" src="{{ asset($img) }}" />
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

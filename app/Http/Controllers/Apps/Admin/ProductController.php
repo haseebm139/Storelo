@@ -17,9 +17,16 @@ use Illuminate\Validation\Rule;
 use Str;
 class ProductController extends Controller
 {
-    public function importProduct()
+    public function importProduct(Request $request)
     {
-         
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|mimes:xls,xlsx,csv', 
+
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->with(['type'=>'error','message'=>$validator->errors()->first()]);
+        }
         Excel::import(new ProductImport,request()->file('file'));
          
         return redirect()

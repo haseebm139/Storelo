@@ -26,30 +26,39 @@ class ProductImport implements ToModel, WithHeadingRow
         $category_name_in_english = $row['category_name_in_english'];
         $getMenuId = $this->getMenuId($menu_name_in_english);
         $getCateId = $this->getCateId($category_name_in_english);
-        if ($getMenuId == false) {
-            return false;
-        }
-        if ($getCateId == false) {
-            return false;
-        }
-        dd($getCateId);
-
-        $item['name'] = $row['product_name_in_english'];
-        $item['slug'] = $uniqueSlug;
-        $item['name_in_he'] = $row['product_name_in_hebrew'];
-        $item['price'] = $row['price'];
+        if ($getMenuId == false || $getCateId == false) {
+            return ;
+        } 
         $item['menu_id'] = $getMenuId;
         $item['category_id'] = $getCateId;
-
-        dd($item);
-        return new Product([
-            //
-        ]);
+        if ($row['product_image_url']) {
+            # code...
+            $item['image'] = $row['product_image_url'];
+        }
+        if ($row['product_name_in_english']) {
+            # code...
+            $item['name'] = $row['product_name_in_english'];
+            $item['slug'] = $uniqueSlug;
+        }
+        if ($row['product_name_in_hebrew']) {
+            # code...
+            $item['name_in_he'] = $row['product_name_in_hebrew'];
+        }
+        if ($row['price']) {
+            # code...
+            $item['price'] = $row['price'];
+        }
+         
+         
+        return new Product($item);
+        
+        
     }
 
     public function getMenuId($name){
         $slug = Str::slug($name);
         $menu = Menu::where('slug',$slug)->first();
+        
         if(isset($menu)){
             return $menu->id;
         }

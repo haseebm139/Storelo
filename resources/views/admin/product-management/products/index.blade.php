@@ -33,13 +33,13 @@
 
                 <div class="px-7 py-5" data-kt-user-table-filter="form">
 
-                    <form action="{{ route('product-management.product.import') }}" method="POST"
+                    {{-- <form action="{{ route('product-management.product.import') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="file" class="form-control">
                         <br>
                         <button class="btn btn-success">Import User Data</button>
-                    </form>
+                    </form> --}}
 
                 </div>
 
@@ -55,22 +55,112 @@
                     </button>
 
                     <!--end::Add user-->
+
+                    <button type="button" class="btn btn-hover-danger btn-icon" data-bs-toggle="modal"
+                        data-bs-target="#kt_modal_add_file">
+
+                        <span class="menu-icon">{!! getIcon('add-files', 'fs-2tx') !!}</span>
+
+                    </button>
+
+                    <button type="button" class="btn btn-primary download-btn"
+                        data-path={{ asset('download/example.csv') }}>
+                        <span class="indicator-label">
+                            Download Example File
+                        </span>
+
+                    </button>
                 </div>
 
                 <!--end::Toolbar-->
 
-                <!--begin::Group actions-->
-                <div class="d-flex justify-content-end align-items-center d-none" data-kt-user-table-toolbar="selected">
-                    <div class="fw-bold me-5">
-                        <span class="me-2" data-kt-user-table-select="selected_count"></span> Selected
+
+                <!--begin::Modal - Add task-->
+                <div class="modal fade" id="kt_modal_add_file" tabindex="-1" aria-hidden="true">
+                    <!--begin::Modal dialog-->
+                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                        <!--begin::Modal content-->
+                        <div class="modal-content">
+                            <!--begin::Modal header-->
+                            <div class="modal-header" id="kt_modal_add_user_header1">
+                                <!--begin::Modal title-->
+                                <h2 class="fw-bold">Upload CSV file</h2>
+                                <!--end::Modal title-->
+
+                                <!--begin::Close-->
+                                <div class="btn btn-icon btn-sm btn-active-icon-primary"
+                                    data-kt-users-modal-action="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
+                                            class="path2"></span></i>
+                                </div>
+                                <!--end::Close-->
+                            </div>
+                            <!--end::Modal header-->
+                            <form id="kt_modal_add_user_form1" class="form"
+                                action="{{ route('product-management.product.import') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+
+                                <!--begin::Modal body-->
+                                <div class="modal-body px-5 my-7">
+
+
+                                    <!--begin::Form-->
+
+                                    <!--begin::Scroll-->
+                                    <div class="d-flex flex-column scroll-y px-5 px-lg-10"
+                                        id="kt_modal_add_user_scroll1" data-kt-scroll="true"
+                                        data-kt-scroll-activate="true" data-kt-scroll-max-height="auto"
+                                        data-kt-scroll-dependencies="#kt_modal_add_user_header1"
+                                        data-kt-scroll-wrappers="#kt_modal_add_user_scroll1"
+                                        data-kt-scroll-offset="300px">
+
+
+
+                                        <!--end::Image input placeholder-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="required fw-semibold fs-6 mb-2" name="name">Upload CSV
+                                                File</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input type="file" name="file"
+                                                class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                            <!--end::Input-->
+                                        </div>
+
+
+
+
+
+
+
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Scroll-->
+
+                                <!--begin::Actions-->
+                                <div class="text-center pt-10 mb-5">
+                                    <button type="submit" class="btn btn-primary">
+                                        <span class="indicator-label">
+                                            Add
+                                        </span>
+
+                                    </button>
+
+                                </div>
+
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
                     </div>
-
-                    <button type="button" class="btn btn-danger" data-kt-user-table-select="delete_selected">
-                        Delete Selected
-                    </button>
+                    <!--end::Modal content-->
                 </div>
-                <!--end::Group actions-->
-
+                <!--end::Modal dialog-->
 
 
                 <!--begin::Modal - Add task-->
@@ -143,7 +233,8 @@
                                                             class="path1"></span><span class="path2"></span></i>
 
                                                     <!--begin::Inputs-->
-                                                    <input type="file" name="image" accept=".png, .jpg, .jpeg" />
+                                                    <input type="file" name="image"
+                                                        accept=".png, .jpg, .jpeg" />
                                                     <input type="hidden" name="avatar_remove" />
                                                     <!--end::Inputs-->
                                                 </label>
@@ -296,7 +387,16 @@
 
                             @foreach ($data as $item)
                                 <tr>
-                                    <td><img style="height:80px; width:80px;" src="{{ $item->image }}" alt="">
+                                    <td>
+                                        @if (Str::startsWith($item->image, ['http', 'https']))
+                                            <img style="height: 80px; width: 80px;" src="{{ $item->image }}"
+                                                alt="">
+                                        @else
+                                            <img style="height: 80px; width: 80px;" src="{{ asset($item->image) }}"
+                                                alt="">
+                                        @endif
+
+
                                     </td>
                                     <td>{{ $item->name ?? '' }}</td>
                                     <td>{{ $item->name_in_he ?? '' }}</td>
@@ -371,6 +471,23 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script>
             $(document).ready(function() {
+
+                $('.download-btn').click(function(e) {
+                    let path = $(this).attr('data-path');
+
+                    let anchor = document.createElement('a');
+                    anchor.href = path;
+                    anchor.download = path.split('/').pop(); // Extract the filename from the path
+                    anchor.style.display = 'none';
+                    document.body.appendChild(anchor);
+
+                    // Trigger a click event on the anchor element
+                    anchor.click();
+
+                    // Clean up: remove the anchor element from the DOM
+                    document.body.removeChild(anchor);
+                });
+
                 function showModal(description) {
                     document.getElementById('modal-description').textContent = description;
 

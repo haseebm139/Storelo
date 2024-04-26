@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('special_products', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->nullable();
+            $table->string('image')->nullable()->default('default.png');
             $table->string('title')->nullable();
             $table->string('title_in_he')->nullable();
             $table->longText('description')->nullable();
