@@ -3,7 +3,7 @@
 <x-default-layout>
 
     @section('title')
-        Edit Menu
+        Edit Category
     @endsection
     <style>
         .img-fluid {

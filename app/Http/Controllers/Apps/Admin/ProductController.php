@@ -9,11 +9,23 @@ use App\Models\Category;
 use App\Models\Menu;
 
 
+use App\Imports\ProductImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 use Validator;
 use Illuminate\Validation\Rule;
 use Str;
 class ProductController extends Controller
 {
+    public function importProduct()
+    {
+         
+        Excel::import(new ProductImport,request()->file('file'));
+         
+        return redirect()
+                ->back()
+                ->with(['message'=>'Bulk Products Upload Successfully','type'=>'success']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -190,6 +202,8 @@ class ProductController extends Controller
         }
 
     }
+
+    
 
     private function makeUniqueSlug($slug)
     {

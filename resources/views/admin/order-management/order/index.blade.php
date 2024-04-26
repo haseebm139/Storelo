@@ -75,7 +75,7 @@
                             <!--end::Modal header-->
 
                             <form id="kt_modal_add_user_form" class="form"
-                                action="{{ route('product-management.events.store') }}" method="POST"
+                                action="{{ route('website-management.events.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <!--begin::Modal body-->
@@ -379,7 +379,7 @@
                     else
                         var status = 0;
                     $.ajax({
-                        url: "{{ route('product-management.events.change.status') }}",
+                        url: "{{ route('website-management.events.change.status') }}",
                         type: 'GET',
                         /*dataType: 'json',*/
                         data: {

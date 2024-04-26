@@ -69,7 +69,7 @@
                             <!--begin::Modal header-->
                             <div class="modal-header" id="kt_modal_add_user_header">
                                 <!--begin::Modal title-->
-                                <h2 class="fw-bold">Add Menu</h2>
+                                <h2 class="fw-bold">Add Category</h2>
                                 <!--end::Modal title-->
 
                                 <!--begin::Close-->
@@ -126,8 +126,7 @@
                                             <!--begin::Input-->
                                             <input type="text" name="name"
                                                 class="form-control form-control-solid mb-3 mb-lg-0"
-                                                placeholder="Category
-                                                Name In English" />
+                                                placeholder="Category Name In English" />
                                             <!--end::Input-->
                                         </div>
 
@@ -141,8 +140,7 @@
                                             <!--begin::Input-->
                                             <input type="text" name="name_in_he"
                                                 class="form-control form-control-solid mb-3 mb-lg-0"
-                                                placeholder="Category
-                                                Name In Hebrew" />
+                                                placeholder="Category Name In Hebrew" />
                                             <!--end::Input-->
                                         </div>
 

@@ -29,8 +29,8 @@
                 <!--begin::Content-->
                 <div class="card-body py-4 mx-20">
                     <!--begin::Form-->
-                    <form action="{{ route('product-management.slider.update', $data->id ?? '') }}"
-                        method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('website-management.slider.update', $data->id ?? '') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -46,7 +46,7 @@
                         <!--end::Image input placeholder-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2" name="name">Event Image</label>
+                            <label class="required fw-semibold fs-6 mb-2" name="name">Event Slider</label>
                             <!--end::Label-->
                         </div>
                         <!--begin::Image input-->

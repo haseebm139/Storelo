@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" href="{{ asset('web_assets/img/favicon.png') }}">
 
     <title>Eliran</title>
-    <!--<title>@yield('title')</title>-->
+
     @yield('style')
 </head>
 
@@ -63,7 +63,7 @@
                         <a class="navbar-brand mx-0" href="{{ route('home') }}"><img src="{{ asset($image) }}"
                                 class="nav-img" alt=""></a>
                     </div>
-                    <div class="collapse navbar-collapse flex-1 nav-background">
+                    <div class="collapse navbar-collapse flex-1 nav-background" id="navbar-collapse">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item language1" data-language="en">
                                 <a class="nav-link" href="{{ route('changeLang', ['lang' => 'en']) }}"><img
@@ -118,7 +118,7 @@
                                 class="nav-img" alt=""></a>
                     </div>
 
-                    <div class="collapse navbar-collapse flex-1 nav-background">
+                    <div class="collapse navbar-collapse flex-1 nav-background" id="navbar-collapse">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item language1" data-language="en">
                                 <a class="nav-link" href="{{ route('changeLang', ['lang' => 'en']) }}"><img
@@ -170,7 +170,7 @@
                         <a class="navbar-brand mx-0" href="{{ route('home') }}"><img src="{{ asset($image) }}"
                                 class="nav-img" alt=""></a>
                     </div>
-                    <div class="collapse navbar-collapse flex-1 nav-background">
+                    <div class="collapse navbar-collapse flex-1 nav-background" id="navbar-collapse">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item language1" data-language="en">
                                 <a class="nav-link" href="{{ route('changeLang', ['lang' => 'en']) }}"><img

@@ -24,7 +24,7 @@
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
                     <div class="card-title">
-                        <h2 class="fw-bold">Edit Menu</h2>
+                        <h2 class="fw-bold">Edit Special Product</h2>
                     </div>
                 </div>
                 <!--end::Card header-->
@@ -49,7 +49,7 @@
                         <!--end::Image input placeholder-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2" name="name">Event Image</label>
+                            <label class="required fw-semibold fs-6 mb-2" name="image">Image</label>
                             <!--end::Label-->
                         </div>
                         <!--begin::Image input-->

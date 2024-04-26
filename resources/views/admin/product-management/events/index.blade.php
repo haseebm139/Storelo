@@ -3,7 +3,7 @@
         Events
     @endsection
     @section('breadcrumbs')
-        {{ Breadcrumbs::render('product-management.events.index') }}
+        {{ Breadcrumbs::render('website-management.events.index') }}
     @endsection
 
     <div id="kt_app_content" class="app-content  flex-column-fluid ">
@@ -83,7 +83,7 @@
                             <!--end::Modal header-->
 
                             <form id="kt_modal_add_user_form" class="form"
-                                action="{{ route('product-management.events.store') }}" method="POST"
+                                action="{{ route('website-management.events.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <!--begin::Modal body-->
@@ -281,7 +281,7 @@
 
                                     <td class="text-end">
 
-                                        <form action="{{ route('product-management.events.destroy', $item->id) }}"
+                                        <form action="{{ route('website-management.events.destroy', $item->id) }}"
                                             method="post" style="display:inline">
                                             @csrf
                                             @method('DELETE')
@@ -290,7 +290,7 @@
                                             </button>
                                         </form>
 
-                                        <form action="{{ route('product-management.events.edit', $item->id) }}"
+                                        <form action="{{ route('website-management.events.edit', $item->id) }}"
                                             method="get" style="display:inline">
                                             @csrf
 
@@ -372,7 +372,7 @@
                     else
                         var status = 0;
                     $.ajax({
-                        url: "{{ route('product-management.events.change.status') }}",
+                        url: "{{ route('website-management.events.change.status') }}",
                         type: 'GET',
                         /*dataType: 'json',*/
                         data: {

@@ -107,15 +107,15 @@ Breadcrumbs::for('product-management.product.show', function (BreadcrumbTrail $t
 /* end::Product */
 
 /* begin::Events */
-Breadcrumbs::for('product-management.events.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('website-management.events.index', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Events', route('product-management.events.index'));
+    $trail->push('Events', route('website-management.events.index'));
 
 });
-Breadcrumbs::for('product-management.events.show', function (BreadcrumbTrail $trail, Event $data) {
+Breadcrumbs::for('website-management.events.show', function (BreadcrumbTrail $trail, Event $data) {
 
-    $trail->parent('product-management.events.index');
-    $trail->push(ucwords($data->name), route('product-management.events.show', $data));
+    $trail->parent('website-management.events.index');
+    $trail->push(ucwords($data->name), route('website-management.events.show', $data));
 });
 /* end::Events */
 
@@ -138,15 +138,15 @@ Breadcrumbs::for('product-management.special-products.show', function (Breadcrum
 
 
 /* begin::Slider */
-Breadcrumbs::for('product-management.slider.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('website-management.slider.index', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Slider', route('product-management.slider.index'));
+    $trail->push('Slider', route('website-management.slider.index'));
 
 });
-Breadcrumbs::for('product-management.slider.show', function (BreadcrumbTrail $trail, Slider $data) {
+Breadcrumbs::for('website-management.slider.show', function (BreadcrumbTrail $trail, Slider $data) {
 
-    $trail->parent('product-management.slider.index');
-    $trail->push(ucwords($data->title), route('product-management.slider.show', $data));
+    $trail->parent('website-management.slider.index');
+    $trail->push(ucwords($data->title), route('website-management.slider.show', $data));
 });
 /* end::Slider */
 

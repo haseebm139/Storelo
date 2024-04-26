@@ -219,7 +219,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('website-management.order.*') ? 'active' : '' }}"
+                        <a class="menu-link {{ request()->routeIs('website-management.website.*') ? 'active' : '' }}"
                             href="{{ route('website-management.website.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
@@ -233,8 +233,8 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('product-management.slider.*') ? 'active' : '' }}"
-                            href="{{ route('product-management.slider.index') }}">
+                        <a class="menu-link {{ request()->routeIs('website-management.slider.*') ? 'active' : '' }}"
+                            href="{{ route('website-management.slider.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -246,8 +246,8 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('product-management.events.*') ? 'active' : '' }}"
-                            href="{{ route('product-management.events.index') }}">
+                        <a class="menu-link {{ request()->routeIs('website-management.events.*') ? 'active' : '' }}"
+                            href="{{ route('website-management.events.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>

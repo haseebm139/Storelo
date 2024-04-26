@@ -33,6 +33,19 @@
 
                 <div class="px-7 py-5" data-kt-user-table-filter="form">
 
+                    <form action="{{ route('product-management.product.import') }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file" class="form-control">
+                        <br>
+                        <button class="btn btn-success">Import User Data</button>
+                    </form>
+
+                </div>
+
+
+                <div class="px-7 py-5" data-kt-user-table-filter="form">
+
                     <!--begin::Add user-->
                     <button type="button" class="btn btn-hover-danger btn-icon" data-bs-toggle="modal"
                         data-bs-target="#kt_modal_add_user">
@@ -69,7 +82,7 @@
                             <!--begin::Modal header-->
                             <div class="modal-header" id="kt_modal_add_user_header">
                                 <!--begin::Modal title-->
-                                <h2 class="fw-bold">Add Menu</h2>
+                                <h2 class="fw-bold">Add Product</h2>
                                 <!--end::Modal title-->
 
                                 <!--begin::Close-->
@@ -109,7 +122,7 @@
                                         <!--end::Image input placeholder-->
                                         <div class="fv-row mb-7">
                                             <!--begin::Label-->
-                                            <label class="required fw-semibold fs-6 mb-2" name="name">Menu
+                                            <label class="required fw-semibold fs-6 mb-2" name="name">Product
                                                 Image</label>
                                             <!--end::Label-->
                                         </div>

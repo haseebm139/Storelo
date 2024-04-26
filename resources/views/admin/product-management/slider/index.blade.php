@@ -3,7 +3,7 @@
         Slider
     @endsection
     @section('breadcrumbs')
-        {{ Breadcrumbs::render('product-management.slider.index') }}
+        {{ Breadcrumbs::render('website-management.slider.index') }}
     @endsection
 
     <div id="kt_app_content" class="app-content  flex-column-fluid ">
@@ -69,7 +69,7 @@
                             <!--begin::Modal header-->
                             <div class="modal-header" id="kt_modal_add_user_header">
                                 <!--begin::Modal title-->
-                                <h2 class="fw-bold">Add Menu</h2>
+                                <h2 class="fw-bold">Add Slider</h2>
                                 <!--end::Modal title-->
 
                                 <!--begin::Close-->
@@ -83,7 +83,7 @@
                             <!--end::Modal header-->
 
                             <form id="kt_modal_add_user_form" class="form"
-                                action="{{ route('product-management.slider.store') }}" method="POST"
+                                action="{{ route('website-management.slider.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <!--begin::Modal body-->
@@ -109,7 +109,7 @@
                                         <!--end::Image input placeholder-->
                                         <div class="fv-row mb-7">
                                             <!--begin::Label-->
-                                            <label class="required fw-semibold fs-6 mb-2" name="name">Event
+                                            <label class="required fw-semibold fs-6 mb-2" name="image">Slider
                                                 Image</label>
                                             <!--end::Label-->
                                         </div>
@@ -281,7 +281,7 @@
 
                                     <td class="text-end">
 
-                                        <form action="{{ route('product-management.slider.destroy', $item->id) }}"
+                                        <form action="{{ route('website-management.slider.destroy', $item->id) }}"
                                             method="post" style="display:inline">
                                             @csrf
                                             @method('DELETE')
@@ -290,7 +290,7 @@
                                             </button>
                                         </form>
 
-                                        <form action="{{ route('product-management.slider.edit', $item->id) }}"
+                                        <form action="{{ route('website-management.slider.edit', $item->id) }}"
                                             method="get" style="display:inline">
                                             @csrf
 
@@ -372,7 +372,7 @@
                     else
                         var status = 0;
                     $.ajax({
-                        url: "{{ route('product-management.slider.change.status') }}",
+                        url: "{{ route('website-management.slider.change.status') }}",
                         type: 'GET',
                         /*dataType: 'json',*/
                         data: {

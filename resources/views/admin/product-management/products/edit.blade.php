@@ -27,7 +27,7 @@
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
                     <div class="card-title">
-                        <h2 class="fw-bold">Edit Menu</h2>
+                        <h2 class="fw-bold">Edit Product</h2>
                     </div>
                 </div>
                 <!--end::Card header-->

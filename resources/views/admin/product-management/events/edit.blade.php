@@ -12,7 +12,7 @@
     </style>
 
     @section('breadcrumbs')
-        {{ Breadcrumbs::render('product-management.events.show', $data) }}
+        {{ Breadcrumbs::render('website-management.events.show', $data) }}
     @endsection
 
     {{-- @dd($data) --}}
@@ -35,7 +35,7 @@
                 <!--begin::Content-->
                 <div class="card-body py-4 mx-20">
                     <!--begin::Form-->
-                    <form action="{{ route('product-management.events.update', $data->id ?? '') }}" method="POST"
+                    <form action="{{ route('website-management.events.update', $data->id ?? '') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

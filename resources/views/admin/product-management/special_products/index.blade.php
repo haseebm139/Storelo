@@ -69,7 +69,7 @@
                             <!--begin::Modal header-->
                             <div class="modal-header" id="kt_modal_add_user_header">
                                 <!--begin::Modal title-->
-                                <h2 class="fw-bold">Add Menu</h2>
+                                <h2 class="fw-bold">Add Special Product</h2>
                                 <!--end::Modal title-->
 
                                 <!--begin::Close-->
@@ -109,7 +109,7 @@
                                         <!--end::Image input placeholder-->
                                         <div class="fv-row mb-7">
                                             <!--begin::Label-->
-                                            <label class="required fw-semibold fs-6 mb-2" name="name">Event
+                                            <label class="required fw-semibold fs-6 mb-2" name="image">
                                                 Image</label>
                                             <!--end::Label-->
                                         </div>
@@ -252,7 +252,7 @@
                             <th class="min-w-125px">Title In Hebrew</th>
                             <th class="min-w-125px">Description In English</th>
                             <th class="min-w-125px">Description In Hebrew</th>
-                            <th class="min-w-125px">Today SpePECIAL</th>
+                            <th class="min-w-125px">Today Special</th>
                             <th class="text-end min-w-70px">Action</th>
                         </tr>
                     </thead>

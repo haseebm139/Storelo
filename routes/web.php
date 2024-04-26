@@ -38,7 +38,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/my-profile', [DashboardController::class,'myProfile'])->name('profile');
     Route::get('/my-profile-update-email', [DashboardController::class,'myProfileUpdateEmail'])->name('myprofileUpdateEmail');
     Route::get('/my-profile-update-name', [DashboardController::class,'myProfileUpdateName'])->name('myprofileUpdateName');
-Route::get('/my-profile-update-password', [DashboardController::class,'myProfileUpdatePassword'])->name('myprofileUpdatePassword');
+    Route::get('/my-profile-update-password', [DashboardController::class,'myProfileUpdatePassword'])->name('myprofileUpdatePassword');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::name('user-management.')->group(function () {
@@ -55,9 +55,9 @@ Route::get('/my-profile-update-password', [DashboardController::class,'myProfile
 
         Route::resource('/product', ProductController::class);
         Route::get('product-change-status', [ProductController::class,'change_status'])->name('product.change.status');
+        Route::POST('product-import', [ProductController::class,'importProduct'])->name('product.import');
 
-        Route::resource('/events', EventController::class);
-        Route::get('events-change-status', [EventController::class,'change_status'])->name('events.change.status');
+        
 
         Route::resource('/special-products', SpecialProductController::class);
         Route::get('special-products-change-status', [SpecialProductController::class,'change_status'])->name('special-products.change.status');
@@ -75,6 +75,12 @@ Route::get('/my-profile-update-password', [DashboardController::class,'myProfile
 
     Route::name('website-management.')->group(function () {
         Route::resource('/website', WebsiteSettingController::class);
+
+        Route::resource('/events', EventController::class);
+        Route::get('events-change-status', [EventController::class,'change_status'])->name('events.change.status');
+
+        Route::resource('/slider', SliderController::class);
+        Route::get('slider-change-status', [SliderController::class,'change_status'])->name('slider.change.status');
     });
 
     Route::resource('image/upload', ImageUpload::class);
