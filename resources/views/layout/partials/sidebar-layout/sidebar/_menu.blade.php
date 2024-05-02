@@ -219,6 +219,20 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
+                        <a class="menu-link {{ request()->routeIs('website-management.awards.*') ? 'active' : '' }}"
+                            href="{{ route('website-management.awards.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Award</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
                         <a class="menu-link {{ request()->routeIs('website-management.website.*') ? 'active' : '' }}"
                             href="{{ route('website-management.website.index') }}">
                             <span class="menu-bullet">

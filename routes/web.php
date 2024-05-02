@@ -17,6 +17,7 @@ use App\Http\Controllers\Apps\Admin\SpecialProductController;
 use App\Http\Controllers\Apps\Admin\OrderController;
 use App\Http\Controllers\Apps\Admin\SliderController;
 use App\Http\Controllers\Apps\Admin\WebsiteSettingController;
+use App\Http\Controllers\Apps\Admin\AwardController;
 
 use App\Http\Controllers\Webs\HomeController;
 
@@ -75,7 +76,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::name('website-management.')->group(function () {
         Route::resource('/website', WebsiteSettingController::class);
-
+        Route::resource('/awards', AwardController::class);
+        
         Route::resource('/events', EventController::class);
         Route::get('events-change-status', [EventController::class,'change_status'])->name('events.change.status');
 

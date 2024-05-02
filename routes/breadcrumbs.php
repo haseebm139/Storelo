@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Event;
 use App\Models\Slider;
+use App\Models\Award;
 
 
 use Diglactic\Breadcrumbs\Breadcrumbs;
@@ -175,3 +176,15 @@ Breadcrumbs::for('website-management.website.show', function (BreadcrumbTrail $t
     $trail->push(ucwords('Data'), route('website-management.website.show', $data));
 });
 /* end::Slider */
+/* begin::Award */
+Breadcrumbs::for('website-management.awards.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Award', route('website-management.awards.index'));
+
+});
+Breadcrumbs::for('website-management.awards.show', function (BreadcrumbTrail $trail, Award $data) {
+
+    $trail->parent('website-management.awards.index');
+    $trail->push(ucwords('Award'), route('website-management.awards.show', $data));
+});
+/* end::Award */
