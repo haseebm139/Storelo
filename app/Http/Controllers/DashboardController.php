@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\MailingList;
 
 use App\Models\User;
+use App\Models\Order;
+use App\Models\PageVisitor;
+
+
 use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Validation\Rule;
@@ -13,7 +17,12 @@ class DashboardController extends Controller
     public function index()
     {
         addVendors(['amcharts', 'amcharts-maps', 'amcharts-stock']);
-        $data = MailingList::get();
+        $data['mail'] = MailingList::get();
+        $data['orders'] = Order::count();
+        $data['home'] = PageVisitor::where('pages','home')->count();
+        $data['product'] = PageVisitor::where('pages','product')->count();
+        
+        // dd($data['orders']);
         return view('pages.dashboards.index',compact('data'));
     }
 
