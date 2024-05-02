@@ -50,14 +50,20 @@
                         All Categories
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#All"
+                        <a class="dropdown-item categories-list" data-category-slug="all" href="#All"
                             onclick="toggleTab('All')">{{ $lang == 'he' ? 'את כל' : 'All' }}</a>
 
-
+                        @php
+                            if ($lang == 'he') {
+                                $cm_name = $item->name_in_he;
+                            } else {
+                                $cm_name = \Str::upper($item->name);
+                            }
+                        @endphp
                         @if (isset($data['categories']))
                             @foreach ($data['categories_list'] as $item)
                                 <a class="dropdown-item categories-list" href="javascript:void(0)"
-                                    data-category-slug="{{ $item->slug }}">{{ Str::upper($item->name) }}</a>
+                                    data-category-slug="{{ $item->slug }}">{{ Str::upper($item->cm_name) }}</a>
                             @endforeach
                         @endif
 
@@ -535,7 +541,7 @@
                 console.log(get_category);
                 loadMoreData1(1)
             });
-            $('.categories-list').on('click', function(e) {
+            $(document).on('click', '.categories-list', function(e) {
                 get_category = $(this).attr('data-category-slug');
                 $("#category").val(get_category);
                 if (get_category == 'all') {
