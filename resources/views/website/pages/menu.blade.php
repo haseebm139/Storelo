@@ -53,17 +53,18 @@
                         <a class="dropdown-item categories-list" data-category-slug="all" href="#All"
                             onclick="toggleTab('All')">{{ $lang == 'he' ? 'את כל' : 'All' }}</a>
 
-                        @php
-                            if ($lang == 'he') {
-                                $cm_name = $item->name_in_he;
-                            } else {
-                                $cm_name = \Str::upper($item->name);
-                            }
-                        @endphp
-                        @if (isset($data['categories']))
+
+                        @if (isset($data['categories_list']))
                             @foreach ($data['categories_list'] as $item)
+                                @php
+                                    if ($lang == 'he') {
+                                        $cm_name = $item->name_in_he;
+                                    } else {
+                                        $cm_name = \Str::upper($item->name);
+                                    }
+                                @endphp
                                 <a class="dropdown-item categories-list" href="javascript:void(0)"
-                                    data-category-slug="{{ $item->slug }}">{{ Str::upper($item->cm_name) }}</a>
+                                    data-category-slug="{{ $item->slug }}">{{ $cm_name }}</a>
                             @endforeach
                         @endif
 
@@ -78,7 +79,7 @@
                         aria-controls="home" aria-selected="true">{{ $lang == 'he' ? 'את כל' : 'All' }}</a>
                 </li>
                 <!-- Add more tabs here up to 17 -->
-                @if (isset($data['categories']))
+                @if (isset($data['categories_list']))
                     @foreach ($data['categories_list'] as $item)
                         @php
                             if ($lang == 'he') {
