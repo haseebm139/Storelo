@@ -86,11 +86,11 @@ class ProductController extends Controller
             $input['category_id'] = $request->category_id;
             $input['menu_id'] = $request->menu_id;
             $input['price'] = $request->price;
-            $data->update($input);
+            Product::create($input);
 
             return redirect()
             ->route('product-management.product.index')
-            ->with(['message'=>'Updated Successfully','type'=>'success']);
+            ->with(['message'=>'Create Successfully','type'=>'success']);
         } catch (\Throwable $e) {
             return redirect()->back()->with(['type' => 'error', 'message' => 'Something went wrong']);
         }
@@ -167,7 +167,7 @@ class ProductController extends Controller
                 ->with(['message'=>'Updated Successfully','type'=>'success']);
             }
 
-            return redirect()->back();
+            return redirect()->back()->with(['type' => 'success', 'message' => 'Update Successfully']);
         } catch (\Throwable $e) {
             return redirect()->back()->with(['type' => 'error', 'message' => 'Something went wrong']);
         }

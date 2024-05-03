@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\WebsiteSetting;
+use App\Models\Award;
 use Str;
 class WebsiteSeeder extends Seeder
 {
@@ -23,5 +24,19 @@ class WebsiteSeeder extends Seeder
         $item['address_in_hebrew']='אליעזר פרי 14 תל אביב';
 
         WebsiteSetting::create($item);
+        //  Awards
+        $item1['image']='documents/fake/images/award.png';
+        $item1['bg_image']='documents/fake/images/award_bg.jpg';
+        $item1['description']='<h5>Welcome To</h5>
+                                <h4><strong>JOIN THE FAMILY</strong></h4>        
+                                <p>We&#39;ve been shortlisted in the Japanese category!<br />
+                                Wanna show your love and help us hit the top spot?</p>';
+        $item1['description_in_he']='<pre aria-label="Translated text" data-placeholder="Translation" data-ved="2ahUKEwj3qYmaxu-FAxXrQvEDHeOhDRAQ3ewLegQIBRAU" dir="rtl" id="tw-target-text">
+                                    ברוך הבא ל
+                                    <strong>הצטרפו למשפחה</strong>
+                                    הגענו לרשימה הקצרה בקטגוריית היפנית!
+                                    רוצה להראות את אהבתך ולעזור לנו להגיע למקום הראשון?</pre>';
+
+        Award::create($item1);
     }
 }

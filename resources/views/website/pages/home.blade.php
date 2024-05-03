@@ -391,37 +391,49 @@
 
         </div>
     </section>
+    @if (isset($data['award']))
+        @php
+            $award_bg_image = $data['award']->bg_image ?? 'web_assets/img/welcome.jpg';
+        @endphp
+        <section
+            class="welcome-section"style="background: url({{ asset($award_bg_image) }}); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <div class="container">
 
-    <section
-        class="welcome-section"style="background: url({{ asset('web_assets/img/welcome.jpg') }}); background-size: cover; background-position: center; background-repeat: no-repeat;">
-        <div class="container">
+                <div class="row mt-4">
+                    @php
+                        $award_image = $data['award']->image ?? 'web_assets/img/welcome-sec.png';
 
-            <div class="row mt-4">
+                        $award_description = '';
+                        if ($lang == 'he') {
+                            $award_description = $data['award']->description_in_he ?? '';
+                        } else {
+                            $award_description = $data['award']->description ?? '';
+                        }
+                    @endphp
 
-                <div class="col-sm-6 d-flex justify-content-center">
-                    <img src="{{ asset('web_assets/img/welcome-sec.png') }}" class="img-welcome" alt="">
-                </div>
-                <div class="col-sm-4">
-                    <div class="welcome-body">
+                    <div class="col-sm-6 d-flex justify-content-center">
+                        <img src="{{ asset($award_image) }}" class="img-welcome" alt="">
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="welcome-body">
 
-                        <h5 class="welcome-des @if ($lang == 'he') rtl @endif">{{ __('home.welcome_to') }}
+                            {{-- <h5 class="welcome-des @if ($lang == 'he') rtl @endif">{{ __('home.welcome_to') }}
                         </h5>
                         <h4 class="welcome-descripation @if ($lang == 'he') rtl @endif">
-                            {{ __('home.join_our_family') }}</h4>
-                        <p class="welcome-text-title @if ($lang == 'he') rtl @endif">
-                            {{ __('home.award_description') }}
-                            <br>
-                            {{ __('home.award_description1') }}
-                        </p>
+                            {{ __('home.join_our_family') }}</h4> --}}
+                            <p class="welcome-text-title  ">
+                                {!! $award_description !!}
+                            </p>
 
-                        <a href="#"
-                            class="btn btn-primary welcome-btn @if ($lang == 'he') about-btn-rtl @endif">{{ __('home.vote_for_us') }}</a>
+                            <a href="#"
+                                class="btn btn-primary welcome-btn @if ($lang == 'he') about-btn-rtl @endif">{{ __('home.vote_for_us') }}</a>
+                        </div>
                     </div>
+                    <div class="col-sm-1"></div>
                 </div>
-                <div class="col-sm-2"></div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 @endsection
 @section('script')
 @endsection

@@ -32,7 +32,43 @@ class AwardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         
+        $validator = Validator::make($request->all(), [
+            'bg_image' => 'required', 
+            'image' => 'required', 
+            'description' => 'required', 
+            'description_in_he' => 'required', 
+
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->with(['type'=>'error','message'=>$validator->errors()->first()]);
+        }
+        try {
+            if($request->hasFile('image'))
+            {
+                $img = time().$request->file('image')->getClientOriginalName();
+                $file_path = "documents/awards/".$img;
+                $request->image->move(public_path("documents/awards/"), $img);
+                $input['image'] = $file_path;
+            }
+            if($request->hasFile('bg_image'))
+            {
+                $img = time().$request->file('bg_image')->getClientOriginalName();
+                $file_path = "documents/awards/".$img;
+                $request->bg_image->move(public_path("documents/awards/"), $img);
+                $input['bg_image'] = $file_path;
+            }
+            $input['description'] = $request->description;
+            $input['description_in_he'] = $request->description_in_he;
+
+            Award::create($input);
+            return redirect()
+            ->route('product-management.awards.index')
+            ->with(['message'=>'Create Successfully','type'=>'success']);
+        } catch (\Throwable $e) {
+            return redirect()->back()->with(['type' => 'error', 'message' => 'Something went wrong']);
+        } 
     }
 
     /**
@@ -59,34 +95,27 @@ class AwardController extends Controller
     {
         try{
             $data =  Award::find($id);
-            if($request->hasFile('logo'))
+            if($request->hasFile('image'))
             {
-                $img = time().$request->file('logo')->getClientOriginalName();
-                $file_path = "documents/logo/".$img;
-                $request->logo->move(public_path("documents/logo/"), $img);
-                $input['logo']  = $file_path;
+                $img = time().$request->file('image')->getClientOriginalName();
+                $file_path = "documents/awards/".$img;
+                $request->image->move(public_path("documents/awards/"), $img);
+                $input['image']  = $file_path;
             }
-            if ($request->working_hours) {
-                $input['working_hours']  = $request->working_hours;
+            if($request->hasFile('bg_image'))
+            {
+                $img = time().$request->file('bg_image')->getClientOriginalName();
+                $file_path = "documents/awards/".$img;
+                $request->bg_image->move(public_path("documents/awards/"), $img);
+                $input['bg_image']  = $file_path;
             }
-            if ($request->working_hours_in_hebrew) {
-                $input['working_hours_in_hebrew']  = $request->working_hours_in_hebrew;
+            if ($request->description_in_he) {
+                $input['description_in_he']  = $request->description_in_he;
             }
-            if ($request->address) {
-                $input['address']  = $request->address;
+            if ($request->description) {
+                $input['description']  = $request->description;
             }
-            if ($request->address_in_hebrew) {
-                $input['address_in_hebrew']  = $request->address_in_hebrew;
-            }
-            if ($request->email) {
-                $input['email']  = $request->email;
-            }
-            if ($request->contact) {
-                $input['contact']  = $request->contact;
-            }
-            if ($request->website_url) {
-                $input['website_url']  = $request->website_url;
-            }
+             
             $data->update($input);
 
             return redirect()

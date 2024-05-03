@@ -13,6 +13,8 @@ use App\Models\SpecialProduct;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Slider;
+use App\Models\Award;
+
 use App\Models\PageVisitor;
 use Str;
 use Validator;
@@ -97,6 +99,7 @@ class HomeController extends Controller
         $data['menu'] = Menu::where('status',1)->get();
         $data['events'] = Event::where('status',1)->get();
         $data['special_products'] = SpecialProduct::where('status',1)->get();
+        $data['award'] = Award::first();
         $this->addVisitor('home');
         return view('website.pages.home',compact('data'));
     }
