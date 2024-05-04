@@ -15,7 +15,75 @@
     <link rel="icon" type="image/png" href="{{ asset('web_assets/img/favicon.png') }}">
 
     <title>Eliran</title>
+    <style>
+        img.nav-img-logo {
+            width: 61%;
+        }
 
+        img.nav-img-logo {
+            width: 54%;
+            margin-left: 88px;
+        }
+
+        button.navbar-toggler.navigation {
+            width: 39px;
+            border: 0;
+        }
+
+        img.nav-imgs {
+            margin-top: 2px;
+            width: 35px;
+            margin-left: -27px;
+        }
+
+        img.nav-imgages {
+            width: 33px;
+        }
+
+        ul.nav.navbar-nav.cols.fixed-icons {
+            margin-top: -54px;
+        }
+
+        @media only screen and (min-width: 412px) and (max-width: 412px) {
+            button.navbar-toggler.navigation {
+                width: 61px;
+                margin-top: -50px;
+            }
+        }
+
+        @media only screen and (min-width: 430px) and (max-width: 430px) {
+            button.navbar-toggler.navigation {
+                width: 39px;
+                border: 0;
+                margin-top: -55px;
+            }
+        }
+
+        @media only screen and (min-width: 320px) and (max-width: 320px) {
+            img.nav-img-logo {
+                width: 54%;
+                margin-left: 50px;
+            }
+
+            ul.nav.navbar-nav.cols.fixed-icons {
+                margin-top: -46px;
+                margin-left: auto;
+            }
+
+            img.nav-imgs {
+                margin-top: -84px;
+                width: 35px;
+                margin-left: -39px;
+            }
+
+            button.navbar-toggler.navigation {
+                border: 0;
+                margin-left: -15px;
+                margin-top: -69px;
+            }
+
+        }
+    </style>
     @yield('style')
 </head>
 
@@ -28,11 +96,177 @@
             $image = $website->logo ?? 'assets/img/nav-back.png';
             $lang = session()->get('locale');
         @endphp
+
+        {{-- Begin:: For Large Screens --}}
         @if ($lang == 'en')
-            <nav class="navbar navbar-expand-md navbar-dark  main-nav fixed-top"
+            <nav class="navbar navbar-expand-md navbar-dark main-nav fixed-top d-lg-none d-md-none d-sm-block"
                 style="background: url({{ $image }});">
                 <div class="container">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                    <button class="navbar-toggler navigation" type="button" data-toggle="collapse"
+                        data-target="#navbar-collapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="order-first order-md-0 d-flex justify-content-center">
+                        <a class="navbar-brand mx-0" href="{{ route('home') }}"><img src="{{ asset($image) }}"
+                                class="nav-img-logo" alt=""></a>
+                    </div>
+                    <ul class="nav navbar-nav cols fixed-icons">
+                        <li class="nav-item language1" data-language="en">
+                            <a class="nav-link" href="{{ route('changeLang', ['lang' => 'en']) }}"><img
+                                    src="{{ asset('web_assets/img/group.png') }}" class="nav-imgages"
+                                    alt=""></a>
+                        </li>
+                        <li class="nav-item language1" data-language="he">
+                            <a class="nav-link nav-flag" href="{{ route('changeLang', ['lang' => 'he']) }}"><img
+                                    src="{{ asset('web_assets/img/flag2.png') }}" class="nav-imgs" alt=""></a>
+                        </li>
+                    </ul>
+
+                    <div class="collapse navbar-collapse flex-1 nav-background" id="navbar-collapse">
+                        <ul class="nav navbar-nav w-100">
+                            @if (isset($menu[0]))
+                                @foreach ($menu as $item)
+                                    @if ($item->slug == 'main-dishes')
+                                        <li class="nav-item">
+                                            <a class="nav-link"
+                                                href="{{ route('website.menus', ['slug' => $item->slug]) }}">{{ __('home.eat_storelo') }}</a>
+                                        </li>
+                                    @endif
+                                    @if ($item->slug == 'alcohol')
+                                        <li class="nav-item">
+                                            <a class="nav-link"
+                                                href="{{ route('website.menus', ['slug' => $item->slug]) }}">{{ __('home.drink') }}</a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">{{ __('home.main_menu') }}</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+
+
+                </div>
+            </nav>
+        @elseif($lang == 'he')
+            <nav class="navbar navbar-expand-md navbar-dark main-nav fixed-top d-lg-none d-md-none d-sm-block"
+                style="background: url({{ $image }});">
+                <div class="container">
+                    <button class="navbar-toggler navigation" type="button" data-toggle="collapse"
+                        data-target="#navbar-collapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="order-first order-md-0 d-flex justify-content-center">
+                        <a class="navbar-brand mx-0" href="{{ route('home') }}"><img src="{{ asset($image) }}"
+                                class="nav-img-logo" alt=""></a>
+                    </div>
+                    <ul class="nav navbar-nav cols fixed-icons">
+                        <li class="nav-item language1" data-language="en">
+                            <a class="nav-link" href="{{ route('changeLang', ['lang' => 'en']) }}"><img
+                                    src="{{ asset('web_assets/img/group.png') }}" class="nav-imgages"
+                                    alt=""></a>
+                        </li>
+                        <li class="nav-item language1" data-language="he">
+                            <a class="nav-link nav-flag" href="{{ route('changeLang', ['lang' => 'he']) }}"><img
+                                    src="{{ asset('web_assets/img/flag2.png') }}" class="nav-imgs" alt=""></a>
+                        </li>
+                    </ul>
+
+                    <div class="collapse navbar-collapse flex-1 nav-background" id="navbar-collapse">
+                        <ul class="nav navbar-nav w-100">
+                            @if (isset($menu[0]))
+                                @foreach ($menu as $item)
+                                    @if ($item->slug == 'main-dishes')
+                                        <li class="nav-item">
+                                            <a class="nav-link"
+                                                href="{{ route('website.menus', ['slug' => $item->slug]) }}">{{ __('home.eat_storelo') }}</a>
+                                        </li>
+                                    @endif
+                                    @if ($item->slug == 'alcohol')
+                                        <li class="nav-item">
+                                            <a class="nav-link"
+                                                href="{{ route('website.menus', ['slug' => $item->slug]) }}">{{ __('home.drink') }}</a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">{{ __('home.main_menu') }}</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+
+
+                </div>
+            </nav>
+        @else
+            <nav class="navbar navbar-expand-md navbar-dark main-nav fixed-top d-lg-none d-md-none d-sm-block"
+                style="background: url({{ $image }});">
+                <div class="container">
+                    <button class="navbar-toggler navigation" type="button" data-toggle="collapse"
+                        data-target="#navbar-collapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="order-first order-md-0 d-flex justify-content-center">
+                        <a class="navbar-brand mx-0" href="{{ route('home') }}"><img src="{{ asset($image) }}"
+                                class="nav-img-logo" alt=""></a>
+                    </div>
+                    <ul class="nav navbar-nav cols fixed-icons">
+                        <li class="nav-item language1" data-language="en">
+                            <a class="nav-link" href="{{ route('changeLang', ['lang' => 'en']) }}"><img
+                                    src="{{ asset('web_assets/img/group.png') }}" class="nav-imgages"
+                                    alt=""></a>
+                        </li>
+                        <li class="nav-item language1" data-language="he">
+                            <a class="nav-link nav-flag" href="{{ route('changeLang', ['lang' => 'he']) }}"><img
+                                    src="{{ asset('web_assets/img/flag2.png') }}" class="nav-imgs"
+                                    alt=""></a>
+                        </li>
+                    </ul>
+
+                    <div class="collapse navbar-collapse flex-1 nav-background" id="navbar-collapse">
+                        <ul class="nav navbar-nav w-100">
+                            @if (isset($menu[0]))
+                                @foreach ($menu as $item)
+                                    @if ($item->slug == 'main-dishes')
+                                        <li class="nav-item">
+                                            <a class="nav-link"
+                                                href="{{ route('website.menus', ['slug' => $item->slug]) }}">{{ __('home.eat_storelo') }}</a>
+                                        </li>
+                                    @endif
+                                    @if ($item->slug == 'alcohol')
+                                        <li class="nav-item">
+                                            <a class="nav-link"
+                                                href="{{ route('website.menus', ['slug' => $item->slug]) }}">{{ __('home.drink') }}</a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">{{ __('home.main_menu') }}</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+
+
+                </div>
+            </nav>
+        @endif
+        {{-- End::For Small Screens --}}
+        {{-- Begin:: For Large Screens --}}
+        @if ($lang == 'en')
+            <nav class="navbar navbar-expand-md navbar-dark main-nav fixed-top d-none d-sm-block"
+                style="background: url({{ $image }});">
+                <div class="container">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbar-collapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse flex-1 nav-background" id="navbar-collapse">
@@ -80,10 +314,11 @@
                 </div>
             </nav>
         @elseif($lang == 'he')
-            <nav class="navbar navbar-expand-md navbar-dark  main-nav fixed-top"
+            <nav class="navbar navbar-expand-md navbar-dark main-nav fixed-top d-none d-sm-block"
                 style="background: url({{ $image }});">
                 <div class="container">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbar-collapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
@@ -135,7 +370,7 @@
                 </div>
             </nav>
         @else
-            <nav class="navbar navbar-expand-md navbar-dark  main-nav fixed-top"
+            <nav class="navbar navbar-expand-md navbar-dark main-nav fixed-top d-none d-sm-block"
                 style="background: url({{ $image }});">
                 <div class="container">
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -187,7 +422,7 @@
                 </div>
             </nav>
         @endif
-
+        {{-- End::For Large Screens --}}
     </header>
     {{-- Header --}}
 
@@ -241,7 +476,8 @@
             <div class="row footer-top">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
-                    <img src="{{ asset('web_assets/img/footer-img.png') }}" class="img-footer" alt="">
+                    <img src="{{ asset('web_assets/img/footer-img.png') }}" class="img-footer  d-none d-sm-block"
+                        alt="">
                 </div>
                 <div class="col-sm-6 foam-bg">
 
