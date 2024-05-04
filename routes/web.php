@@ -18,6 +18,7 @@ use App\Http\Controllers\Apps\Admin\OrderController;
 use App\Http\Controllers\Apps\Admin\SliderController;
 use App\Http\Controllers\Apps\Admin\WebsiteSettingController;
 use App\Http\Controllers\Apps\Admin\AwardController;
+use App\Http\Controllers\Apps\Admin\VideoController;
 
 use App\Http\Controllers\Webs\HomeController;
 
@@ -78,9 +79,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('/website', WebsiteSettingController::class);
         Route::resource('/awards', AwardController::class);
         
+        Route::resource('/video', VideoController::class);
+        Route::get('video-change-status', [VideoController::class,'change_status'])->name('video.change.status');
+
         Route::resource('/events', EventController::class);
         Route::get('events-change-status', [EventController::class,'change_status'])->name('events.change.status');
-
         Route::resource('/slider', SliderController::class);
         Route::get('slider-change-status', [SliderController::class,'change_status'])->name('slider.change.status');
     });

@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Event;
 use App\Models\Slider;
 use App\Models\Award;
+use App\Models\Video;
 
 
 use Diglactic\Breadcrumbs\Breadcrumbs;
@@ -188,3 +189,16 @@ Breadcrumbs::for('website-management.awards.show', function (BreadcrumbTrail $tr
     $trail->push(ucwords('Award'), route('website-management.awards.show', $data));
 });
 /* end::Award */
+
+/* begin::Video */
+Breadcrumbs::for('website-management.video.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Video', route('website-management.video.index'));
+
+});
+Breadcrumbs::for('website-management.video.show', function (BreadcrumbTrail $trail, Video $data) {
+
+    $trail->parent('website-management.video.index');
+    $trail->push(ucwords('Video'), route('website-management.video.show', $data));
+});
+/* end::Video */

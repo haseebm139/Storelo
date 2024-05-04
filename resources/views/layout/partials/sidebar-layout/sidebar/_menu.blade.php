@@ -247,6 +247,20 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
+                        <a class="menu-link {{ request()->routeIs('website-management.video.*') ? 'active' : '' }}"
+                            href="{{ route('website-management.video.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Video</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    {{-- <div class="menu-item">
+                        <!--begin:Menu link-->
                         <a class="menu-link {{ request()->routeIs('website-management.slider.*') ? 'active' : '' }}"
                             href="{{ route('website-management.slider.index') }}">
                             <span class="menu-bullet">
@@ -255,7 +269,7 @@
                             <span class="menu-title">Slider</span>
                         </a>
                         <!--end:Menu link-->
-                    </div>
+                    </div> --}}
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
                     <div class="menu-item">

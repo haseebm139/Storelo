@@ -8,7 +8,7 @@
 @section('content')
     {{-- Slider --}}
     {{-- $data['slider'] --}}
-    @if (isset($data['slider'][0]))
+    @if (isset($data['slider1'][0]))
         <section class="hero-page">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators d-none">
@@ -56,7 +56,11 @@
         </section>
     @endif
     {{-- Slider --}}
-
+    <section class="hero-page">
+        <video muted autoplay loop width="100%" class="video-mar">
+            <source src="{{ asset('web_assets/video/video.mp4') }}" type="video/mp4"  />
+        </video>
+    </section>
 
     {{-- Menu Bar --}}
     @if (isset($data['menu'][0]))
@@ -88,8 +92,8 @@
 
                                         <p id="test" class="card-text">{{ $name }}</p>
                                         <div class="d-flex justify-content-center">
-                                            <img src="{{ asset('web_assets/img/knife.png') }}" alt="" id=""
-                                                class="knife-icon d-none">
+                                            <img src="{{ asset('web_assets/img/knife.png') }}" alt=""
+                                                id="" class="knife-icon d-none">
                                         </div>
                                     </div>
 
