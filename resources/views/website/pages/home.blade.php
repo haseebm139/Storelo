@@ -131,32 +131,34 @@
                         </div>
                     @endforeach
                 @else
-                    <div class="col-sm-2 col-text-underline">
-                        <a href="{{ route('website.menus', ['slug' => $item->slug]) }}">
+                    @foreach ($data['menu'] as $item)
+                        <div class="col-sm-2 col-text-underline">
+                            <a href="{{ route('website.menus', ['slug' => $item->slug]) }}">
 
-                            <div class="card" onmouseover="showKnife(this)" onmouseout="hideKnife(this)">
-                                @php
-                                    $img = $item->image ?? 'default.png';
-                                    if ($lang == 'he') {
-                                        $name = $item->name_in_he;
-                                    } else {
-                                        $name = \Str::upper($item->name);
-                                    }
-                                @endphp
+                                <div class="card" onmouseover="showKnife(this)" onmouseout="hideKnife(this)">
+                                    @php
+                                        $img = $item->image ?? 'default.png';
+                                        if ($lang == 'he') {
+                                            $name = $item->name_in_he;
+                                        } else {
+                                            $name = \Str::upper($item->name);
+                                        }
+                                    @endphp
 
-                                <img src="{{ asset($img) }}" class="img-fluid" alt="...">
-                                <div class="card-body">
+                                    <img src="{{ asset($img) }}" class="img-fluid" alt="...">
+                                    <div class="card-body">
 
-                                    <p id="test" class="card-text">{{ $name }}</p>
-                                    <div class="d-flex justify-content-center">
-                                        <img src="{{ asset('web_assets/img/knife.png') }}" alt="" id=""
-                                            class="knife-icon d-none">
+                                        <p id="test" class="card-text">{{ $name }}</p>
+                                        <div class="d-flex justify-content-center">
+                                            <img src="{{ asset('web_assets/img/knife.png') }}" alt=""
+                                                id="" class="knife-icon d-none">
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>
-                        </a>
-                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
                 @endif
 
                 <div class="col-sm-1"></div>
@@ -259,7 +261,7 @@
         </div>
     @endif
     <section class="item-buy">
-        <div class="container">
+        {{-- <div class="container">
             @if ($lang == 'he')
                 @if (isset($data['special_products'][0]))
                     <div class="row">
@@ -393,7 +395,218 @@
             @endif
 
 
+        </div> --}}
+
+        <div class="container">
+            <div class="row d-none d-md-flex">
+                @if ($lang == 'he')
+                    @if (isset($data['special_products'][0]))
+                        @foreach ($data['special_products']->sortByDesc('id') as $item)
+                            @php
+                                $img = $item->image ?? 'web_assets/img/cardimg2.png';
+                                $currentDate = \Carbon\Carbon::now();
+                                // Format the current date as 'd M Y' (e.g., 17 Apr 2024)
+                                $formattedDate = $currentDate->format('d M Y');
+
+                                $sp_title = '';
+                                $sp_description = '';
+                                if ($lang == 'he') {
+                                    $sp_title = $item->title_in_he ?? '';
+                                    $sp_description = $item->description_in_he ?? '';
+                                } else {
+                                    $sp_title = \Str::upper($item->title ?? '');
+                                    $sp_description = $item->description ?? '';
+                                }
+                            @endphp
+
+                            <div class="col-sm-4">
+                                <div class="card2">
+                                    <img src="{{ asset($img) }}" class="img-fluid img-card2" alt="Product Image">
+                                    <div class="card-body card-d">
+                                        <p class="card-date">{{ $formattedDate }}</p>
+                                        <h5 class="card-title-item-buy">{{ $sp_title }}</h5>
+                                        <p class="card-text-title">{{ $sp_description }}</p>
+                                        <a href="#"
+                                            class="btn btn-primary button-card-2">{{ __('home.read_more') }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                @else
+                    @if (isset($data['special_products'][0]))
+                        @foreach ($data['special_products'] as $item)
+                            @php
+                                $img = $item->image ?? 'web_assets/img/cardimg2.png';
+                                $currentDate = \Carbon\Carbon::now();
+                                // Format the current date as 'd M Y' (e.g., 17 Apr 2024)
+                                $formattedDate = $currentDate->format('d M Y');
+
+                                $sp_title = '';
+                                $sp_description = '';
+                                if ($lang == 'he') {
+                                    $sp_title = $item->title_in_he ?? '';
+                                    $sp_description = $item->description_in_he ?? '';
+                                } else {
+                                    $sp_title = \Str::upper($item->title ?? '');
+                                    $sp_description = $item->description ?? '';
+                                }
+                            @endphp
+
+                            <div class="col-sm-4">
+                                <div class="card2">
+                                    <img src="{{ asset($img) }}" class="img-fluid img-card2" alt="Product Image">
+                                    <div class="card-body card-d">
+                                        <p class="card-date">{{ $formattedDate }}</p>
+                                        <h5 class="card-title-item-buy">{{ $sp_title }}</h5>
+                                        <p class="card-text-title">{{ $sp_description }}</p>
+                                        <a href="#"
+                                            class="btn btn-primary button-card-2">{{ __('home.read_more') }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                @endif
+            </div>
+            <br>
+            {{-- For Small Screens --}}
+            <div class="row d-sm-block d-md-none">
+                <div class="col-sm-12">
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                @if ($lang == 'he')
+                                    @foreach ($data['special_products']->sortByDesc('id') as $item)
+                                        @php
+                                            $img = $item->image ?? 'web_assets/img/cardimg2.png';
+                                            $currentDate = \Carbon\Carbon::now();
+                                            // Format the current date as 'd M Y' (e.g., 17 Apr 2024)
+                                            $formattedDate = $currentDate->format('d M Y');
+
+                                            $sp_title = '';
+                                            $sp_description = '';
+                                            if ($lang == 'he') {
+                                                $sp_title = $item->title_in_he ?? '';
+                                                $sp_description = $item->description_in_he ?? '';
+                                            } else {
+                                                $sp_title = \Str::upper($item->title ?? '');
+                                                $sp_description = $item->description ?? '';
+                                            }
+                                        @endphp
+
+                                        <td>
+                                            <div class="card2">
+                                                <img src="{{ asset($img) }}" class="img-fluid" alt="Product Image">
+                                                <div class="card-body card-d">
+                                                    <p class="card-title-date"> {{ $formattedDate }}</p>
+                                                    <h5 class="card-titlecap">{{ $sp_title }}</h5>
+                                                    <p class="card-title-des">{{ $sp_description }}</p>
+                                                    <a href="#"
+                                                        class="btn btn-primary button-cards">{{ __('home.read_more') }}</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    @endforeach
+                                @else
+                                    @foreach ($data['special_products'] as $item)
+                                        @php
+                                            $img = $item->image ?? 'web_assets/img/cardimg2.png';
+                                            $currentDate = \Carbon\Carbon::now();
+                                            // Format the current date as 'd M Y' (e.g., 17 Apr 2024)
+                                            $formattedDate = $currentDate->format('d M Y');
+
+                                            $sp_title = '';
+                                            $sp_description = '';
+                                            if ($lang == 'he') {
+                                                $sp_title = $item->title_in_he ?? '';
+                                                $sp_description = $item->description_in_he ?? '';
+                                            } else {
+                                                $sp_title = \Str::upper($item->title ?? '');
+                                                $sp_description = $item->description ?? '';
+                                            }
+                                        @endphp
+
+                                        <td>
+                                            <div class="card2">
+                                                <img src="{{ asset($img) }}" class="img-fluid" alt="Product Image">
+                                                <div class="card-body card-d">
+                                                    <p class="card-title-date"> {{ $formattedDate }}</p>
+                                                    <h5 class="card-titlecap">{{ $sp_title }}</h5>
+                                                    <p class="card-title-des">{{ $sp_description }}</p>
+                                                    <a href="#"
+                                                        class="btn btn-primary button-cards">{{ __('home.read_more') }}</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    @endforeach
+                                @endif
+
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @if (isset($data['events'][0]))
+                @foreach ($data['events'] as $key => $item)
+                    @php
+                        $img = $item->image ?? 'web_assets/img/about.png';
+                        $isEven = $key % 2 == 0;
+
+                        $event_title = '';
+                        $event_description = '';
+                        if ($lang == 'he') {
+                            $event_title = $item->title_in_he ?? '';
+                            $event_description = $item->description_in_he ?? '';
+                        } else {
+                            $event_title = \Str::upper($item->title ?? '');
+                            $event_description = $item->description ?? '';
+                        }
+                    @endphp
+                    @if ($isEven)
+                        <div class="row mt-4">
+                            <div class="col-sm-8">
+                                <img src="{{ asset($img) }}" class="img-fluid" alt="">
+                            </div>
+                            <div class="col-sm-4 about-bg">
+                                <div class="about-body">
+
+                                    <h5 class="abour-des @if ($lang == 'he') rtl @endif">
+                                        {{ $event_title }}</h5>
+                                    <p class="about-text-title @if ($lang == 'he') rtl @endif">
+                                        {!! $event_description !!}</p>
+
+                                    <a href="javascript:void(0)"
+                                        class="btn btn-primary about-btn @if ($lang == 'he') about-btn-rtl @endif">{{ __('home.explore_more') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="row mt-4">
+
+                            <div class="col-sm-4 about-bg">
+                                <div class="about-body">
+
+                                    <h5 class="abour-des @if ($lang == 'he') rtl @endif">
+                                        {{ $event_title }}</h5>
+                                    <p class="about-text-title @if ($lang == 'he') rtl @endif">
+                                        {!! $event_description !!}</p>
+
+                                    <a href="javascript:void(0)"
+                                        class="btn btn-primary about-btn @if ($lang == 'he') about-btn-rtl @endif">{{ __('home.explore_more') }}</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <img src="{{ asset($img) }}" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            @endif
         </div>
+
     </section>
     @if (isset($data['award']))
         @php

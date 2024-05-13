@@ -782,3 +782,25 @@ input.qty-input {
 .footer-foam-btn-rtl {
     float: right;
 }
+/* table */
+h5.card-titlecap {
+    font-size: 14px;
+}
+p.card-title-des {
+    font-size: 8px;
+}
+a.btn.btn-primary.button-cards {
+    background: transparent;
+    color: #743e0c;
+    border: 0px;
+    border-bottom: 1px solid #c7803f;
+    font-size: 7px;
+}
+p.card-title-date {
+    background: #c7803f;
+    font-size: 10px;
+    margin-top: 9px;
+    position: relative;
+    z-index: 999;
+    color: white;
+}
