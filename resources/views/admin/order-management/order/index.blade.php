@@ -208,6 +208,7 @@
                             <th class="min-w-125px">Customer Name</th>
                             <th class="min-w-125px">Table No</th>
                             <th class="min-w-125px">Amount</th>
+                            <th class="min-w-125px">EST </th>
                             {{-- <th class="min-w-125px">Status</th> --}}
                             <th class="text-end min-w-70px">Action</th>
                         </tr>
@@ -222,6 +223,7 @@
                                     <td>{!! $item->name ?? '' !!}</td>
                                     <td>{!! $item->table_no ?? '' !!}</td>
                                     <td>{!! $item->amount ?? '' !!}</td>
+                                    <td>{!! $item->est ?? '' !!}</td>
 
                                     {{-- <td>
                                         <div class="form-group">
@@ -292,13 +294,13 @@
                                                                         style="font-weight: 900"
                                                                         id="table_no">03</span>
                                                                 </p>
-                                                            </div>
-                                                            <div class="col-6">
+
                                                                 <p style="font-family:cursive;">
-                                                                    <span>Table No:</span>&nbsp;&nbsp;<span
+                                                                    <span>EST:</span>&nbsp;&nbsp;<span
                                                                         style="font-weight: 900"
-                                                                        id="table_no">03</span>
+                                                                        id="est_time"></span>
                                                                 </p>
+
                                                             </div>
 
                                                         </div>
@@ -425,6 +427,7 @@
                                 $('#total-amount').text(response.data.amount);
                                 $('#qty').text(qty);
                                 $('#table_no').text(response.data.table_no);
+                                $('#est_time').text(response.data.est);
                                 items.forEach(element => {
                                     console.log(element);
                                     no++
