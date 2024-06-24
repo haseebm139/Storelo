@@ -49,5 +49,6 @@ return [
     "drink"=>"Drink",
     "eat_storelo"=>"Eat Storelo",
     "main_menu"=>"Main Menu",
-
+    "total_est" => "Total EST",
+    "est"=>'ETA'
 ];

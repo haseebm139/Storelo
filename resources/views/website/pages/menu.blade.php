@@ -158,7 +158,8 @@
                                                     <table class="table" id="cart_table">
                                                         <div class="row">
                                                             <div class="col-sm-6">
-                                                                <h1 style="font-family:cursive;">{{ __('home.invoice') }}
+                                                                <h1 style="font-family:cursive;">
+                                                                    {{ __('home.invoice') }}
                                                                 </h1>
                                                             </div>
                                                             <div class="col-sm-6">
@@ -252,6 +253,14 @@
                                             <option value="10">10</option>
                                             <!-- Add more options as needed -->
                                         </select>
+                                    </div>
+                                    <div class="col-sm-6 fo">
+                                        <label for="order">{{ __('home.total_est') }}</label>
+                                        <input class="f-input" value="45 Min" type="text" disabled>
+                                        <label for="order">{{ __('home.est') }}</label>
+                                        <input class="f-input"
+                                            value="{{ \Carbon\Carbon::now()->addMinutes(45)->format('h:i A') }}"
+                                            type="text" id="est" disabled>
                                     </div>
 
 
@@ -409,6 +418,7 @@
 
 
                                     </div>
+
                                     <div class="col-sm-4 foram">
 
                                         <div>
@@ -418,7 +428,14 @@
                                                 name="name" placeholder="{{ __('home.your_name') }}" required>
                                         </div>
                                     </div>
-
+                                    <div class="col-sm-6 fo">
+                                        <label for="order">{{ __('home.total_est') }}</label>
+                                        <input class="f-input" value="45 Min" type="text" disabled>
+                                        <label for="order">{{ __('home.est') }}</label>
+                                        <input class="f-input"
+                                            value="{{ \Carbon\Carbon::now()->addMinutes(45)->format('h:i A') }}"
+                                            type="text" id="est">
+                                    </div>
 
 
                                 </div>

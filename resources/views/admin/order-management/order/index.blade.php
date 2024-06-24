@@ -294,10 +294,13 @@
                                                                 </p>
                                                             </div>
                                                             <div class="col-6">
-                                                                <img src="{{ asset('web_assets/img/print.png') }}"
-                                                                    id="printButton" class="float-end"
-                                                                    alt="">
+                                                                <p style="font-family:cursive;">
+                                                                    <span>Table No:</span>&nbsp;&nbsp;<span
+                                                                        style="font-weight: 900"
+                                                                        id="table_no">03</span>
+                                                                </p>
                                                             </div>
+
                                                         </div>
 
 
